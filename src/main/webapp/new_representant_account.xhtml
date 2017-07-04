@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web"
+	rel="stylesheet" />
+<h:outputStylesheet
+	name="webjars/font-awesome/4.4.0/css/font-awesome.css" />
+
+<h:head>
+	<title>Inst. Educacional - Headline Bookstore</title>
+</h:head>
+
+<h:body>
+	<style type="text/css">
+html {
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+}
+</style>
+	<p:panelGrid columns="1" styleClass="ui-noborder"
+		style="margin-top: 7%; margin-left:3%; min-width:40%;  max-width:40%; min-height:50%;">
+		<p:link outcome="index?faces-redirect=true">
+			<h:graphicImage library="imagesandlogos" name="logotipo.png"
+				style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
+		</p:link>
+		<p:outputLabel
+			value="Preencha as informações a seguir para concluir o seu cadastro:" style="font-size:1.3em "></p:outputLabel>
+			
+		<p:panelGrid columns="1" style="width:650px">
+			<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
+			<p:inputText placeholder="Nome completo" style="min-width:90%"></p:inputText>
+			<p:inputText placeholder="Número de CPF" style="min-width:90%"></p:inputText>
+			
+			<p:outputLabel value="Informações de login"></p:outputLabel>
+			<p:inputText placeholder="Nome de Usuário" style="min-width:90%"></p:inputText>
+			<p:inputText placeholder="E-mail (dê preferência ao e-mail institucional)" style="min-width:90%"></p:inputText>
+			<p:inputText placeholder="Digite sua Senha" style="min-width:90%"></p:inputText>
+			<p:inputText placeholder="Digite a Senha Novamente" style="min-width:90%"></p:inputText>
+			
+			<p:outputLabel value="Instituição de Ensino"></p:outputLabel>
+			<p:inputText placeholder="Nome da Instituição" style="min-width:90%"></p:inputText>
+			<p:inputText placeholder="Sigla" style="min-width:90%"></p:inputText>
+			<p:inputText placeholder="Cargo na instituição" style="min-width:90%"></p:inputText>
+			
+			<p:commandButton value="Concluir Cadastro"></p:commandButton>
+		</p:panelGrid>
+		
+
+	</p:panelGrid>
+</h:body>
+</html>

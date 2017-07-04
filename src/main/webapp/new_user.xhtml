@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web"
+	rel="stylesheet" />
+<h:outputStylesheet
+	name="webjars/font-awesome/4.4.0/css/font-awesome.css" />
+
+<h:head>
+	<title>Cadastro - Headline Bookstore</title>
+</h:head>
+
+<h:body>
+	<style type="text/css">
+html {
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	padding: 10px 20px;
+}
+</style>
+<h:form>
+	<p:panelGrid columns="1" styleClass="ui-noborder"
+		style="margin-top: 7%; margin-left:3%; min-width:60%;  max-width:60%; min-height:50%;">
+		<p:link outcome="index?faces-redirect=true">
+			<h:graphicImage library="imagesandlogos" name="logotipo.png"
+				style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
+		</p:link>
+		<p:outputLabel
+			value="Seja bem-vindo à Headline Bookstore! Para começar, selecione um tipo de conta abaixo:"></p:outputLabel>
+		<p:panelGrid columns="4">
+			<p:commandButton value="Conta Convencional (Cliente)" action="#{cadastro.loadNewDefaultUser()}" icon="fa fa-user"
+			style="background-color:TRANSPARENT; border-color:TRANSPARENT;"
+			></p:commandButton>
+				
+			<p:commandButton value="Estudante" action="#{cadastro.loadNewStudentUser()}" icon="fa fa-graduation-cap"
+				style="background-color:TRANSPARENT; border-color:TRANSPARENT;"></p:commandButton>
+			<p:commandButton
+				value="Diretor ou Representante (Instituição Educacional)"
+				icon="fa fa-university"
+				style="background-color:TRANSPARENT; border-color:TRANSPARENT;"  action="#{cadastro.loadNewRepresentantUser()}"></p:commandButton>
+			<p:commandButton value="Escritor ou Representante de Editora"
+				icon="fa fa-pencil"
+				style="background-color:TRANSPARENT; border-color:TRANSPARENT;"  action="#{cadastro.loadNewProducertUser()}"></p:commandButton>
+		</p:panelGrid>
+
+		<p:panelGrid columns="4">
+			<p:outputLabel value="Acesso às funcionalidades básicas de compra e download de conteúdo." style="max-width:70px;"></p:outputLabel>
+			<p:outputLabel value="Acesso facilitado aos materiais de aula da sua instituição."></p:outputLabel>
+			<p:outputLabel value="Facilite as compras dos seus alunos com nosso gerenciamento de bibliografias."></p:outputLabel>
+			<p:outputLabel value="Seja nosso parceiro! Venda suas publicações na nossa plataforma."></p:outputLabel>
+		</p:panelGrid>
+
+	</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
