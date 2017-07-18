@@ -2,17 +2,33 @@ package com.headline.model;
 
 import java.time.LocalDate;
 
-public class Entrega {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
+public class Entrega {
+	
+	@OneToOne
 	private Compra compra;
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private String id;
+	
 	private LocalDate previsao;
+	
+	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	public Entrega(Compra compra, String id, LocalDate previsao, Status status) {
+	public Entrega(){}
+	
+	public Entrega(Compra compra, LocalDate previsao, Status status) {
 		super();
 		this.setCompra(compra);
-		this.id = id;
 		this.previsao = previsao;
 		this.status = status;
 	}

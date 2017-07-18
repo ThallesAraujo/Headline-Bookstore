@@ -2,22 +2,39 @@ package com.headline.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.headline.model.itens.Item;
 import com.headline.model.usuarios.Usuario;
 
-
+@Entity
 public class Compra {
-
+	
+	@ManyToOne
+	@JoinColumn(name="fk_cliente")
 	private Usuario usuario;
+	
+	@Id
 	private String id;
+	
 	private LocalDate data;
-	private ArrayList<Item> itens;
+	
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "fk_compra"), inverseJoinColumns = @JoinColumn(name = "fk_cliente"))
+	private List<Item> itens;
+	
+	public Compra(){}
 
-	public Compra(Usuario usuario, String id, LocalDate data, ArrayList<Item> itens) {
+	public Compra(Usuario usuario, LocalDate data, ArrayList<Item> itens) {
 		super();
 		this.usuario = usuario;
-		this.id = id;
 		this.data = data;
 		this.setItens(itens);
 	}
@@ -46,11 +63,11 @@ public class Compra {
 		this.data = data;
 	}
 
-	public ArrayList<Item> getItens() {
+	public List<Item> getItens() {
 		return itens;
 	}
 
-	public void setItens(ArrayList<Item> itens) {
+	public void setItens(List<Item> itens) {
 		this.itens = itens;
 	}
 

@@ -21,35 +21,58 @@ html {
 	background-size: 100%;
 }
 </style>
-	<p:panelGrid columns="1" styleClass="ui-noborder"
-		style="margin-top: 7%; margin-left:3%; min-width:40%;  max-width:40%; min-height:50%;">
-		<p:link outcome="index?faces-redirect=true">
-			<h:graphicImage library="imagesandlogos" name="logotipo.png"
-				style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
-		</p:link>
-		<p:outputLabel
-			value="Preencha as informações a seguir para concluir o seu cadastro:" style="font-size:1.3em "></p:outputLabel>
-			
-		<p:panelGrid columns="1" style="width:650px">
-			<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
-			<p:inputText placeholder="Nome completo" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Número de CPF" style="min-width:90%"></p:inputText>
-			
-			<p:outputLabel value="Endereço"></p:outputLabel>
-			<p:inputText placeholder="CEP" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Cidade" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Estado" style="min-width:90%"></p:inputText>
-			<p:inputTextarea placeholder="Logradouro" style="min-width:90%"></p:inputTextarea>
-			
-			<p:outputLabel value="Informações de login"></p:outputLabel>
-			<p:inputText placeholder="Nome de Usuário" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Endereço de E-mail" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Digite sua Senha" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Digite a Senha Novamente" style="min-width:90%"></p:inputText>
-			<p:commandButton value="Concluir Cadastro"></p:commandButton>
-		</p:panelGrid>
-		
+	<h:form>
+		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+		<p:panelGrid columns="1" styleClass="ui-noborder"
+			style="margin-top: 7%; margin-left:3%; min-width:40%;  max-width:40%; min-height:50%;">
+			<p:link outcome="index?faces-redirect=true">
+				<h:graphicImage library="imagesandlogos" name="logotipo.png"
+					style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
+			</p:link>
+			<p:outputLabel
+				value="Preencha as informações a seguir para concluir o seu cadastro:"
+				style="font-size:1.3em "></p:outputLabel>
 
-	</p:panelGrid>
+			<p:panelGrid columns="1" style="width:650px">
+				<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
+				<p:inputText placeholder="Nome completo" style="min-width:90%"
+					value="#{defaultUser.cliente.nome}" required="true"
+					requiredMessage="Digite seu nome antes de prosseguir"></p:inputText>
+				<p:inputMask mask="999.999.999-99" style="min-width:90%"
+					placeholder="Número de CPF" value="#{defaultUser.cliente.cpf}"
+					required="true"
+					requiredMessage="Digite seu CPF antes de prosseguir"></p:inputMask>
+
+				<p:outputLabel value="Endereço"></p:outputLabel>
+				<p:inputMask mask="99999-999" placeholder="CEP"
+					style="min-width:90%" value="#{defaultUser.cliente.cep}"
+					required="true" requiredMessage="Digite o CEP de sua localidade"></p:inputMask>
+				<p:inputText placeholder="Cidade" style="min-width:90%"
+					value="#{defaultUser.cliente.cidade}" required="true"
+					requiredMessage="Informe a cidade onde você mora"></p:inputText>
+				<p:inputText placeholder="Estado" style="min-width:90%"
+					value="#{defaultUser.cliente.estado}" required="true"
+					requiredMessage="Informe o estado onde você mora"></p:inputText>
+				<p:inputTextarea placeholder="Logradouro" style="min-width:90%"
+					value="#{defaultUser.cliente.logradouro}" required="true"
+					requiredMessage="Digite o nome da rua, o bairro e o número da casa/apto. onde você mora"></p:inputTextarea>
+
+				<p:outputLabel value="Informações de login"></p:outputLabel>
+				<p:inputText placeholder="Endereço de E-mail" style="min-width:90%"
+					value="#{defaultUser.cliente.email}" required="true"
+					requiredMessage="Por favor, informe seu e-mail (será utilizado no login)"
+					validatorMessage="E-mail inválido">
+					<f:validateRegex
+						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)" />
+				</p:inputText>
+				
+				<p:password placeholder="Digite sua Senha" style="min-width:90%"
+					value="#{defaultUser.cliente.senha}" required="true"
+					requiredMessage="Informe a senha que será utilizada no login"></p:password>
+				<p:commandButton value="Concluir Cadastro"
+					action="#{defaultUser.salvarCliente()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panelGrid>
+	</h:form>
 </h:body>
 </html>

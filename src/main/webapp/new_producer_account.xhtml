@@ -21,53 +21,86 @@ html {
 	background-size: 100%;
 }
 </style>
-<h:form>
-	<p:panelGrid columns="1" styleClass="ui-noborder"
-		style="margin-top: 7%; margin-left:3%; min-width:40%;  max-width:40%; min-height:50%;">
-		<p:link outcome="index?faces-redirect=true">
-			<h:graphicImage library="imagesandlogos" name="logotipo.png"
-				style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
-		</p:link>
-		<p:outputLabel
-			value="Preencha as informações a seguir para concluir o seu cadastro:" style="font-size:1.3em "></p:outputLabel>
-			
-		<p:panelGrid columns="1" style="width:650px">
-			<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
-			<p:inputText placeholder="Nome completo" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Número de CPF" style="min-width:90%"></p:inputText>
-			
-			<p:outputLabel value="Informações de login"></p:outputLabel>
-			<p:inputText placeholder="Nome de Usuário" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="E-mail (dê preferência ao e-mail institucional)" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Digite sua Senha" style="min-width:90%"></p:inputText>
-			<p:inputText placeholder="Digite a Senha Novamente" style="min-width:90%"></p:inputText>
-			
-			<p:panelGrid columns="2" style="max-width:90%;">
-				<h:selectBooleanCheckbox id="cb_produtor" value="#{produtorBean.funcionarioEditora}">
-					<p:ajax update="painel_editora"></p:ajax>
-				</h:selectBooleanCheckbox>
-				<p:outputLabel value="Sou funcionário ou representante de editora (Deixar desmarcado caso você seja um escritor independente.)"></p:outputLabel>
+	<h:form>
+		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+		<p:panelGrid columns="1" styleClass="ui-noborder"
+			style="margin-top: 7%; margin-left:3%; min-width:40%;  max-width:40%; min-height:50%;">
+			<p:link outcome="index?faces-redirect=true">
+				<h:graphicImage library="imagesandlogos" name="logotipo.png"
+					style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
+			</p:link>
+			<p:outputLabel
+				value="Preencha as informações a seguir para concluir o seu cadastro:"
+				style="font-size:1.3em "></p:outputLabel>
+
+			<p:panelGrid columns="1" style="width:650px">
+				<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
+				<p:inputText placeholder="Nome completo" style="min-width:90%"
+					value="#{produtorBean.produtor.nome}" required="true"
+					requiredMessage="Digite seu nome antes de prosseguir"></p:inputText>
+				<p:inputMask mask="999.999.999-99" placeholder="Número de CPF"
+					style="min-width:90%" value="#{produtorBean.produtor.cpf}"
+					required="true"
+					requiredMessage="Digite seu CPF antes de prosseguir"></p:inputMask>
+
+				<p:outputLabel value="Informações de login"></p:outputLabel>
+				<p:inputText
+					placeholder="E-mail (dê preferência ao e-mail institucional)"
+					style="min-width:90%" value="#{produtorBean.produtor.email}"
+					required="true"
+					requiredMessage="Por favor, informe seu e-mail (será utilizado no login)"
+					validatorMessage="E-mail inválido">
+					<f:validateRegex
+						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)" />
+				</p:inputText>
+				
+				<p:password placeholder="Digite sua Senha" style="min-width:90%"
+					value="#{produtorBean.produtor.senha}" required="true"
+					requiredMessage="Informe a senha que será utilizada no login"></p:password>
+
+				<p:panelGrid columns="2" style="max-width:90%;">
+					<h:selectBooleanCheckbox id="cb_produtor"
+						value="#{produtorBean.funcionarioEditora}">
+						<p:ajax update="painel_editora"></p:ajax>
+					</h:selectBooleanCheckbox>
+					<p:outputLabel
+						value="Sou funcionário ou representante de editora (Deixar desmarcado caso você seja um escritor independente.)"></p:outputLabel>
+				</p:panelGrid>
+
+				<h:panelGroup id="painel_editora">
+					<p:panelGrid rendered="#{produtorBean.isFuncionarioEditora()}">
+						<p:outputLabel id="ed_1" value="Informações de Editora"></p:outputLabel>
+						<p:inputText id="ed_2" placeholder="Nome"
+							style="min-width:90%; margin-top:10px !important;"
+							value="#{produtorBean.editora.nome}" required="true" requiredMessage="Por favor, informe o nome da editora onde você trabalha" ></p:inputText>
+						<p:inputMask id="ed_3" mask="99.999.99/9999-99" placeholder="CNPJ"
+							style="min-width:90%; margin-top:10px !important;"
+							value="#{produtorBean.editora.cnpj}" required="true" requiredMessage="É necessário informar o CNPJ" ></p:inputMask>
+						<p:inputText id="ed_4" placeholder="Seu cargo na editora"
+							style="min-width:90%; margin-top:10px !important; margin-bottom:10px !important;"
+							value="#{produtorBean.produtor.cargo}" required="true" requiredMessage="Informe seu cargo na editora"></p:inputText>
+
+						<p:outputLabel id="ed_5" value="Endereço da Editora"></p:outputLabel>
+						<p:inputMask id="ed_6" placeholder="CEP"
+							style="min-width:90%; margin-top:10px !important;"
+							value="#{produtorBean.editora.cep}" mask="99999-999" required="true" requiredMessage="Por favor, informe o CEP da localidade da editora"></p:inputMask>
+						<p:inputText id="ed_7" placeholder="Cidade"
+							style="min-width:90%; margin-top:10px !important;"
+							value="#{produtorBean.editora.cidade}" required="true" requiredMessage="Por favor, informe a cidade onde fica a editora"></p:inputText>
+						<p:inputText id="ed_8" placeholder="Estado"
+							style="min-width:90%; margin-top:10px !important;"
+							value="#{produtorBean.editora.estado}" required="true" requiredMessage="Por favor, informe o estado onde fica a editora"></p:inputText>
+						<p:inputTextarea id="ed_9" placeholder="Logradouro"
+							style="min-width:90%; margin-top:10px !important;"
+							value="#{produtorBean.editora.logradouro}" required="true" requiredMessage="Informe o nome da rua, do bairro e número do do edifício onde fica a editora"></p:inputTextarea>
+					</p:panelGrid>
+				</h:panelGroup>
+				<p:commandButton value="Concluir Cadastro"
+					action="#{produtorBean.salvarProdutor()}"></p:commandButton>
 			</p:panelGrid>
-			
-			<h:panelGroup id="painel_editora">
-			<p:panelGrid rendered="#{produtorBean.isFuncionarioEditora()}">
-			<p:outputLabel id="ed_1" value="Informações de Editora"></p:outputLabel>
-			<p:inputText  id="ed_2" placeholder="Nome" style="min-width:90%; margin-top:10px !important;"></p:inputText>
-			<p:inputText  id="ed_3" placeholder="CNPJ" style="min-width:90%; margin-top:10px !important;"></p:inputText>
-			<p:inputText  id="ed_4" placeholder="Seu cargo na editora" style="min-width:90%; margin-top:10px !important; margin-bottom:10px !important;"></p:inputText>
-			
-			<p:outputLabel  id="ed_5" value="Endereço da Editora"></p:outputLabel>
-			<p:inputText  id="ed_6" placeholder="CEP" style="min-width:90%; margin-top:10px !important;"></p:inputText>
-			<p:inputText  id="ed_7" placeholder="Cidade" style="min-width:90%; margin-top:10px !important;"></p:inputText>
-			<p:inputText  id="ed_8" placeholder="Estado" style="min-width:90%; margin-top:10px !important;"></p:inputText>
-			<p:inputTextarea  id="ed_9" placeholder="Logradouro" style="min-width:90%; margin-top:10px !important;"></p:inputTextarea>
-			</p:panelGrid>
-			</h:panelGroup>
-			<p:commandButton value="Concluir Cadastro"></p:commandButton>
+
 		</p:panelGrid>
-		
-	</p:panelGrid>
-</h:form>
+	</h:form>
 </h:body>
 
 </html>

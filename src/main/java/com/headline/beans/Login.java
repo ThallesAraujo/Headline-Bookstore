@@ -11,26 +11,41 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+import com.headline.model.itens.Genero;
 import com.headline.model.usuarios.Administrador;
 import com.headline.model.usuarios.Usuario;
-import com.headline.persistence.PlaceboDatabase;
+import com.headline.persistence.GenericDAO;
+import com.headline.persistence.UsuarioDAO;
 
 @ViewScoped
 @ManagedBean
 public class Login implements Serializable {
 	
+	/**
+	 * @TODO Implementar logout
+	 */
+	
 	private String usuario;
 	
 	private String senha;
 	
+	private GenericDAO dao;
+	
+	private DashboardLoader loader;
+	
 	@PostConstruct
 	public void createAdmin(){
 		Usuario adm = new Administrador();
-		adm.setNome("Thalles H. Ara˙jo");
+		adm.setNome("Thalles H. Ara√∫jo");
 		adm.setEmail("thalles@mail.com");
 		adm.setSenha("thalles@adm123");
-		ArrayList<Usuario> users = new ArrayList<Usuario>(Arrays.asList(adm));
-		PlaceboDatabase.setUsuarios(users);
+		adm.setCpf("044.044.044-44");
+		try {
+			dao = new GenericDAO();
+			dao.save(adm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String load(){
@@ -55,14 +70,28 @@ public class Login implements Serializable {
 	
 	public String logIn(){
 		
-		Usuario u = PlaceboDatabase.getUsuario(usuario, senha);
-		
-		if(u!=null){
-			return DashboardLoader.loadDashboard(u);
-		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usu·rio n„o est· cadastrado"));
-			return null;
+		if(loader.getUser()!=null){
+			return loader.loadDashboard(loader.getUser());
 		}
+		
+		UsuarioDAO userDAO = new UsuarioDAO();
+		
+		Usuario u;
+		try {
+			u = userDAO.getByLogin(usuario, senha);
+			
+			if(u!=null){
+				return loader.loadDashboard(u);
+			}else{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Este usu√°rio n√£o est√° cadastrado"));
+				return null;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 	

@@ -20,8 +20,10 @@
 		<style type="text/css">
 			
 			html {
+				position: relative;
 				background: url("#{resource['/imagesandlogos/background.jpg']}");
 				background-size: 100%;
+				background-repeat: no-repeat;
 			}
 		
 			.ui-panel .ui-panel-titlebar {
@@ -40,31 +42,17 @@
 			}
 		</style>
 		<h:form>
-			<p:panel header="Best Sellers"
+		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true"/>
+			<p:panel header="Todo o Catálogo"
 				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 				<h:panelGrid columns="4"
 					style="width:100%; border: 0px; margin-top: 20px; margin-bottom: 20px; background-color: TRANSPARENT;">
-					<p:dataGrid value="#{index.tarefas}" var="tarefa" columns="4"
+					<p:dataGrid value="#{indexBean.getCatalogo()}" var="item" columns="3"
 						paginator="true"
 						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
-						<p:panel header="#{tarefa.titulo}" style="border: 0px;">
+						<p:panel header="#{item.titulo}" style="border: 0px;">
 							<h:panelGrid columns="2">
-								<p:outputLabel value="Descrição: "></p:outputLabel>
-								<p:outputLabel value="#{tarefa.descricao}"></p:outputLabel>
-								<p:outputLabel value="Data prevista: "></p:outputLabel>
-								<p:outputLabel value="#{tarefa.dataPrevista}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</p:outputLabel>
-								<p:outputLabel value="Data de Conclusão: "></p:outputLabel>
-								<p:outputLabel value="#{tarefa.dataConclusao}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</p:outputLabel>
-								<p:link value="Editar Tarefa" outcome="#{updateTarefa.load()}">
-									<f:param name="firstid" value="#{tarefa.id}"></f:param>
-								</p:link>
-								<p:link value="Excluir Tarefa" outcome="#{removerTarefa.load()}">
-									<f:param name="secondid" value="#{tarefa.id}"></f:param>
-								</p:link>
+								<img src="data:image/png;base64,#{indexBean.getImageContent(item.capa)}" height="250" width="160"/>
 							</h:panelGrid>
 						</p:panel>
 					</p:dataGrid>

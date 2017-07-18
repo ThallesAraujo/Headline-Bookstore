@@ -2,21 +2,31 @@ package com.headline.model;
 
 import java.time.LocalDate;
 
-import com.headline.model.usuarios.Usuario;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-
-
+@Entity
 public class Promocao {
-
-	private Usuario usuario;
+	
+	@Id
 	private String id;
-	private LocalDate validade;
-	private Tipo tipo;
 
-	public Promocao(Usuario usuario, String id, LocalDate validade, Tipo tipo) {
+	@ManyToOne
+	private Produtor produtor;
+	
+	private LocalDate validade;
+	
+	@Enumerated(EnumType.STRING)
+	private Tipo tipo;
+	
+	public Promocao(){}
+
+	public Promocao(Produtor produtor, LocalDate validade, Tipo tipo) {
 		super();
-		this.setUsuario(usuario);
-		this.id = id;
+		this.produtor = produtor;
 		this.validade = validade;
 		this.tipo = tipo;
 	}
@@ -45,13 +55,6 @@ public class Promocao {
 		this.tipo = tipo;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	public enum Tipo {
 		FRETE, DESCONTO;

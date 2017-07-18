@@ -1,60 +1,71 @@
 package com.headline.model;
 
-public abstract class Produtor {
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.headline.model.itens.Item;
+import com.headline.model.usuarios.Usuario;
+
+@Entity
+@DiscriminatorValue(value="Produtor")
+public class Produtor extends Usuario{
 	
-	private String nome;
-	private String endereco;
-	private String email;
-	private String cnpj;
+	@OneToMany
+	@JoinColumn(name="fk_produtor")
+	private List<Promocao> promocoes;
 	
+	@OneToMany
+	private List<Item> itens;
 	
-	public Produtor(String nome, String endereco, String email, String cnpj) {
-		super();
-		this.nome = nome;
-		this.endereco = endereco;
-		this.email = email;
-		this.cnpj = cnpj;
+	@ManyToOne
+	@JoinColumn(name="fk_editora")
+	private Editora editora;
+	
+	private String cargo;
+	
+	public Produtor(){}
+
+	public List<Promocao> getPromocoes() {
+		return promocoes;
 	}
 
-
-	public String getNome() {
-		return nome;
+	public void setPromocoes(List<Promocao> promocoes) {
+		this.promocoes = promocoes;
 	}
 
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public List<Item> getItens() {
+		return itens;
 	}
 
-
-	public String getEndereco() {
-		return endereco;
+	public void setItens(List<Item> itens) {
+		this.itens = itens;
 	}
 
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public Editora getEditora() {
+		return editora;
 	}
 
-
-	public String getEmail() {
-		return email;
+	public void setEditora(Editora editora) {
+		this.editora = editora;
 	}
 
-
-	public void setEmail(String email) {
-		this.email = email;
+	public String getCargo() {
+		return cargo;
 	}
 
-
-	public String getCnpj() {
-		return cnpj;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
 	
 	
 	

@@ -2,19 +2,27 @@ package com.headline.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.headline.model.usuarios.Usuario;
 
-
+@Entity
 public class Cartao {
-
+	
+	@ManyToOne
+	@JoinColumn(name="fk_cliente")
 	private Usuario usuario;
+	
 	private String titular;
 	private LocalDate dataVencimento;
-	private int numero;
+	@Id
+	private Integer numero;
 	private short digitosDeSeguranca;
 
-	public Cartao() {
-	};
+	public Cartao() {};
 
 	public Cartao(String titular, LocalDate dataVencimento, int numero, short digitosDeSeguranca, Usuario usuario) {
 		super();

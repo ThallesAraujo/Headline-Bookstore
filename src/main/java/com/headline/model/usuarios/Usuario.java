@@ -1,19 +1,34 @@
 package com.headline.model.usuarios;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+
+
+@Entity
+@Inheritance(strategy= InheritanceType.JOINED)
+@DiscriminatorColumn(name ="Tipo", discriminatorType= DiscriminatorType.STRING)
 public abstract class Usuario {
 	
-	private String nome,endereco,email,senha,cpf;
+	private String nome;
+	private String cep;
+	private String cidade;
+	private String estado;
+	private String logradouro;
+	private String email;
+	private String senha;
+	
+	@Id
+	private String cpf;
 	
 	public Usuario(){};
-
-	public Usuario(String nome, String endereco, String email, String senha, String cpf) {
-		super();
-		this.nome = nome;
-		this.endereco = endereco;
-		this.email = email;
-		this.senha = senha;
-		this.cpf = cpf;
-	}
 
 	public String getNome() {
 		return nome;
@@ -23,12 +38,36 @@ public abstract class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public String getEmail() {
@@ -54,6 +93,8 @@ public abstract class Usuario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
+	
 	
 	
 	

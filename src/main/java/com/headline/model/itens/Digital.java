@@ -1,22 +1,31 @@
 package com.headline.model.itens;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+
 import com.headline.model.Editora;
 
-public class Digital extends Item {
+@Entity
+@DiscriminatorValue(value="Item_Digital")
+public class Digital extends Item implements Serializable{
 
-	private String link;
-
-	public Digital(String id, String titulo, String autor, Tipo tipo, Categoria categoria, Editora editora) {
-		super(id, titulo, autor, tipo, categoria, editora);
-		// TODO Auto-generated constructor stub
+	@Lob
+	private byte[] arquivo;
+	
+	public Digital(){}
+	
+	public byte[] getArquivo() {
+		return arquivo;
 	}
 
-	public String getLink() {
-		return link;
+	public void setArquivo(byte[] arquivo) {
+		this.arquivo = arquivo;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+	
 
 }

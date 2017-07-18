@@ -1,25 +1,19 @@
 package com.headline.model.itens;
 
+import java.math.BigDecimal;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import com.headline.model.Editora;
 
+@Entity
+@DiscriminatorValue(value="Item_Físico")
 public class Fisico extends Item {
 	
-	private String isbn;
 	private int quantidadeEmEstoque;
-
-	public Fisico(String id, String titulo, String autor, Tipo tipo, Categoria categoria, int quantidade, Editora editora) {
-		super(id, titulo, autor, tipo, categoria, editora);
-		this.quantidadeEmEstoque = quantidade;
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
+	
+	public Fisico(){}
 
 	public int getQuantidadeEmEstoque() {
 		return quantidadeEmEstoque;

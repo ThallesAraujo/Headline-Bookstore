@@ -1,29 +1,57 @@
 package com.headline.model.itens;
 
+import java.math.BigDecimal;
+
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import com.headline.model.Editora;
+import com.headline.model.Produtor;
 
-public abstract class Item {
-
-	private String id, titulo, autor;
-	private Tipo tipo;
-	private Categoria categoria;
-	private Editora editora;
+@Entity
+@Inheritance(strategy= InheritanceType.JOINED)
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="Tipo")
+public class Item {
 	
-	public Item(String id, String titulo, String autor, Tipo tipo, Categoria categoria, Editora editora) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.autor = autor;
-		this.tipo = tipo;
-		this.categoria = categoria;
-		this.editora = editora;
-	}
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	private Integer id;
+	
+	private String titulo;
+	private String autor;
+	
+	@Enumerated(EnumType.STRING)
+	private Genero genero;
+	
+	@Enumerated(EnumType.STRING)
+	private Categoria categoria;
+	
+	private BigDecimal preco;
+	
+	@ManyToOne
+	private Editora produtor;
+	
+	@Lob
+	private byte[] capa;
+	
+	public Item(){}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -51,22 +79,37 @@ public abstract class Item {
 		this.categoria = categoria;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
+	public Genero getGenero() {
+		return genero;
 	}
 
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
 
-	public Editora getEditora() {
-		return editora;
+	public Editora getProdutor() {
+		return produtor;
 	}
 
-	public void setEditora(Editora editora) {
-		this.editora = editora;
+	public void setProdutor(Editora produtor) {
+		this.produtor = produtor;
+	}
+
+	public byte[] getCapa() {
+		return capa;
+	}
+
+	public void setCapa(byte[] capa) {
+		this.capa = capa;
 	}
 	
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
 	
 
 }

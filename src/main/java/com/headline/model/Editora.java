@@ -1,34 +1,100 @@
 package com.headline.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import com.headline.model.usuarios.FuncionarioEditora;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-public abstract class Editora extends Produtor{
+
+@Entity
+public class Editora{
 	
-	private ArrayList<FuncionarioEditora> funcionarios;
-	private ArrayList<FuncionarioEditora> admnistradores;
+	private String nome;
+	@Id
+	private String cnpj;
+	
+	private String email;
+	
+	@OneToMany (mappedBy="editora")
+	private List<Produtor> funcionarios;
+	
+	private String cep;
+	
+	private String cidade;
+	
+	private String estado;
+	
+	private String logradouro;
 
-	public Editora(String nome, String endereco, String email, String cnpj) {
-		super(nome, endereco, email,cnpj);
-		
+	public Editora(){}
+
+	public String getNome() {
+		return nome;
 	}
 
-	public ArrayList<FuncionarioEditora> getFuncionarios() {
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Produtor> getFuncionarios() {
 		return funcionarios;
 	}
 
-	public void setFuncionarios(ArrayList<FuncionarioEditora> funcionarios) {
+	public void setFuncionarios(List<Produtor> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
 
-	public ArrayList<FuncionarioEditora> getAdmnistradores() {
-		return admnistradores;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setAdmnistradores(ArrayList<FuncionarioEditora> admnistradores) {
-		this.admnistradores = admnistradores;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
 	
 	
 	

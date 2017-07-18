@@ -40,14 +40,14 @@
 ----------------------------------*/
 
 /* states and images */
-.ui-icon { width: 20px; height: 20px; background-image: url("#{resource['images/ui-icons_515151_256x240.png']}"); }
-.ui-widget-content .ui-icon {background-image: url("#{resource['images/ui-icons_515151_256x240.png']}"); }
-.ui-widget-header .ui-icon {background-image: url("#{resource['images/ui-icons_6D929B_256x240.png']}"); }
-.ui-state-default .ui-icon { background-image:url("#{resource['images/ui-icons_6D929B_256x240.png']}"); }
-.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url("#{resource['images/ui-icons_6D929B_256x240.png']}"); }
-.ui-state-active .ui-icon {background-image: url("#{resource['images/ui-icons_f5fafa_256x240.png']}"); }
-.ui-state-highlight .ui-icon {background-image: url("#{resource['images/ui-icons_C1DAD6_256x240.png']}"); }
-.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image:url("#{resource['images/ui-icons_6D929B_256x240.png']}"); }
+.ui-icon { width: 20px; height: 20px; background-image: url("#{resource['primefaces-headline-theme:images/ui-icons_515151_256x240.png']}"); }
+.ui-widget-content .ui-icon {background-image: url("#{resource['primefaces-headline-theme:images/ui-icons_515151_256x240.png']}"); }
+.ui-widget-header .ui-icon {background-image: url("#{resource['primefaces-headline-theme:images/ui-icons_6D929B_256x240.png']}"); }
+.ui-state-default .ui-icon { background-image:url("#{resource['primefaces-headline-theme:images/ui-icons_6D929B_256x240.png']}"); }
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url("#{resource['primefaces-headline-theme:images/ui-icons_6D929B_256x240.png']}"); }
+.ui-state-active .ui-icon {background-image: url("#{resource['primefaces-headline-theme:images/ui-icons_f5fafa_256x240.png']}"); }
+.ui-state-highlight .ui-icon {background-image: url("#{resource['primefaces-headline-theme:images/ui-icons_C1DAD6_256x240.png']}"); }
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image:url("#{resource['primefaces-headline-theme:images/ui-icons_6D929B_256x240.png']}"); }
 
 /* positioning */
 .ui-icon-carat-1-n { background-position: 0 0; }

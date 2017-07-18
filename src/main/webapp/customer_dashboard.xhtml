@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web"
+	rel="stylesheet" />
+<h:outputStylesheet
+	name="webjars/font-awesome/4.4.0/css/font-awesome.css" />
+
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<h:head>
+		<ui:define name="title">Dashboard</ui:define>
+	</h:head>
+
+	<ui:define name="content">
+		<style type="text/css">
+html {
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: 0.5em 1.7em .3em;
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-widget-content {
+	background-color: TRANSPARENT;
+}
+</style>
+
+		<div style="border-color: TRANSPARENT; background-color: TRANSPARENT; padding: 0.5em;">
+			<p:outputLabel style="font-size:1.3em; color: #6D929B; padding: 0.5em;" value="Dashboard - Cliente"></p:outputLabel>
+			<h:form>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

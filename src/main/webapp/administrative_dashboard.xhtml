@@ -18,17 +18,44 @@
 
 	<ui:define name="content">
 		<style type="text/css">
-			
-			html {
-				background: url("#{resource['/imagesandlogos/background.jpg']}");
-				background-size: 100%;
-			}
-		
-		</style>
-		<h:form>
-			<p:panel header="Olá, #{dashboardLoader.getUser().getNome()}">
-			</p:panel>
-		</h:form>
+html {
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: 0.5em 1.7em .3em;
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-widget-content {
+	background-color: TRANSPARENT;
+}
+</style>
+
+		<div style="border-color: TRANSPARENT; background-color: TRANSPARENT; padding: 0.5em;">
+			<p:outputLabel style="font-size:1.3em; color: #6D929B; padding: 0.5em;" value="Dashboard - Administrador"></p:outputLabel>
+			<h:form>
+				<p:panelGrid columns="3"
+					style="border-color: TRANSPARENT; background-color: TRANSPARENT; margin-top: 1.5em; margin-bottom: 1.5em; ">
+					<p:panel header="Itens" style="background-color: TRANSPARENT;">
+						<p:panelGrid columns="1"
+							style="border:0px; border-color: TRANSPARENT; background-color: TRANSPARENT;">
+							<p:commandButton value="Fazer upload de item digital"
+								action="#{admDashboard.loadNewDigitalItem()}"></p:commandButton>
+							<p:commandButton value="Fazer upload de item físico"
+								action="#{admDashboard.loadNewPhysicalItem()}"></p:commandButton>
+						</p:panelGrid>
+					</p:panel>
+				</p:panelGrid>
+			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>
