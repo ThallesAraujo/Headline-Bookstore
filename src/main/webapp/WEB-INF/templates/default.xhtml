@@ -48,19 +48,19 @@ html {
 				<h:graphicImage library="imagesandlogos" name="logotipo.png"
 					style="vertical-align: middle; margin-right: 20px;" />
 			</p:link>
-			<p:commandButton name="bt_livros" action="#{index.addTarefa()}"
+			<p:commandButton name="bt_livros" action="#{livrosBean.load()}"
 				icon="fa fa-book" value="Livros" style="border-color: TRANSPARENT; background-color: TRANSPARENT;"></p:commandButton>
 			<p:commandButton name="bt_periodicos"
-				action="#{selecionarTarefa.load()}" icon="fa fa-newspaper-o"
+				action="#{periodicosBean.load()}" icon="fa fa-newspaper-o"
 				value="Periódicos" style="border-color: TRANSPARENT; background-color: TRANSPARENT;"></p:commandButton>
 			<p:commandButton name="bt_revistas"
-				action="#{selecionarTarefa.load()}" icon="fa fa-picture-o"
+				action="#{revistasBean.load()}" icon="fa fa-picture-o"
 				value="Revistas" style="border-color: TRANSPARENT; background-color: TRANSPARENT;"></p:commandButton>
 			<p:commandButton name="bt_search" action="#{selecionarTarefa.load()}"
 				icon="fa fa-search" value="Algo mais específico..." style="border-color: TRANSPARENT; background-color: TRANSPARENT;"></p:commandButton>
 			<p:commandButton id="bt_login" type="button"
 				icon="fa fa-user" value="${dashboardLoader.getUser()!=null ? ('Olá, ').concat(dashboardLoader.getUser().getNome()): 'Login/Cadastro'}"
-				style="position: fixed !important; right: 10px !important; top: 15px !important; border-color: TRANSPARENT; background-color: TRANSPARENT;">	
+				style="position: absolute !important; right: 10px !important; top: 15px !important; border-color: TRANSPARENT; background-color: TRANSPARENT;">	
 			</p:commandButton>
 			
 			<p:overlayPanel for="bt_login" showEffect="blind" hideEffect="blind" style="background-color: white;">

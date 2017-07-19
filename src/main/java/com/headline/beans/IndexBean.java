@@ -33,8 +33,6 @@ public class IndexBean {
 	private GenericDAO dao;
 	
 	
-
-	
 	@PostConstruct
 	public void initialize(){
 		dao = new GenericDAO();

@@ -45,6 +45,9 @@ public class Item {
 	@Lob
 	private byte[] capa;
 	
+	@Lob
+	private String resumo;
+	
 	public Item(){}
 
 	public Integer getId() {
@@ -110,6 +113,15 @@ public class Item {
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
+
+	public String getResumo() {
+		return resumo;
+	}
+
+	public void setResumo(String resumo) {
+		this.resumo = resumo;
+	}
+	
 	
 
 }

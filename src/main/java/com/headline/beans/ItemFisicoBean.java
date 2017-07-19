@@ -16,12 +16,12 @@ import javax.faces.context.Flash;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import com.headline.model.Editora;
 import com.headline.model.itens.Categoria;
 import com.headline.model.itens.Digital;
 import com.headline.model.itens.Fisico;
 import com.headline.model.itens.Genero;
 import com.headline.persistence.GenericDAO;
-import com.headline.utils.ToolsProduct;
 
 @ManagedBean
 @ViewScoped
@@ -32,6 +32,8 @@ public class ItemFisicoBean implements Serializable {
 	private GenericDAO dao;
 	
 	private UploadedFile capa;
+	
+	private Editora headline;
 
 	@PostConstruct
 	public void instantiate() {
@@ -98,6 +100,16 @@ public class ItemFisicoBean implements Serializable {
 	public void setCapa(UploadedFile capa) {
 		this.capa = capa;
 	}
+
+	public Editora getHeadline() {
+		return headline;
+	}
+
+	public void setHeadline(Editora headline) {
+		this.headline = headline;
+	}
+	
+	
 	
 	
 }

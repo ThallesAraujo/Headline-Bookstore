@@ -65,8 +65,4 @@ public class Entrega {
 		this.compra = compra;
 	}
 
-	public enum Status {
-		ENTREGUE, EM_TRANSPORTE, ATRASADA;
-	}
-
 }

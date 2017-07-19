@@ -51,7 +51,10 @@ html {
 					<f:selectItems value="#{itemFisicoBean.getGeneros()}" var="genero"
 						itemValue="#{genero}" itemLabel="#{genero.getNome()}"></f:selectItems>
 				</p:selectOneMenu>
-
+				
+				<p:outputLabel value="Resumo: "></p:outputLabel>
+				<p:inputTextarea value="#{itemFisicoBean.item.resumo}" style="min-width:450px"/>
+				
 				<p:outputLabel value="Quantidade em estoque: "></p:outputLabel>
 				<p:inputText value="#{itemFisicoBean.item.quantidadeEmEstoque}"
 					required="true"

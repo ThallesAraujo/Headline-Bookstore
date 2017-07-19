@@ -21,7 +21,6 @@ import com.headline.model.itens.Categoria;
 import com.headline.model.itens.Digital;
 import com.headline.model.itens.Genero;
 import com.headline.persistence.GenericDAO;
-import com.headline.utils.ToolsProduct;
 
 @ManagedBean
 @ViewScoped

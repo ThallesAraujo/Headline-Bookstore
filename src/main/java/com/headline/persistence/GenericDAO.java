@@ -54,7 +54,7 @@ public class GenericDAO extends DAO{
 	}
 	
 	
-	public Object getByID(Object objeto, String id) throws Exception {
+	public Object getByID(Object objeto, Integer id) throws Exception {
 		EntityManager em = getEntityManager();
 		Object resultado = null;
 		try {

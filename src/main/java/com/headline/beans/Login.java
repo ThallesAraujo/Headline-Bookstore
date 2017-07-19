@@ -21,10 +21,6 @@ import com.headline.persistence.UsuarioDAO;
 @ManagedBean
 public class Login implements Serializable {
 	
-	/**
-	 * @TODO Implementar logout
-	 */
-	
 	private String usuario;
 	
 	private String senha;

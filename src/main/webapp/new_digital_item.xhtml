@@ -51,6 +51,9 @@ html {
 					<f:selectItems value="#{itemDigitalBean.getGeneros()}" var="genero"
 						itemValue="#{genero}" itemLabel="#{genero.getNome()}"></f:selectItems>
 				</p:selectOneMenu>
+				
+				<p:outputLabel value="Resumo: "></p:outputLabel>
+				<p:inputTextarea value="#{itemDigitalBean.item.resumo}" style="min-width:450px"/>
 
 				<p:outputLabel value="Preço (R$):"></p:outputLabel>
 				<p:inputMask mask="999.99" value="#{itemDigitalBean.item.preco}"

@@ -1,10 +1,12 @@
 package com.headline.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import com.headline.model.itens.Item;
 import com.headline.model.usuarios.Usuario;
 
 @ManagedBean
@@ -13,6 +15,8 @@ public class DashboardLoader implements Serializable{
 	
 
 	private static Usuario user;
+	
+	private static ArrayList<Item> carrinho = new ArrayList<Item>();
 	
 	public static String loadDashboard(Usuario u) {
 		user = u;
@@ -24,6 +28,18 @@ public class DashboardLoader implements Serializable{
 			return null;
 		}
 	}
+
+	public static ArrayList<Item> getCarrinho() {
+		return carrinho;
+	}
+
+
+
+	public static void setCarrinho(ArrayList<Item> carrinho) {
+		DashboardLoader.carrinho = carrinho;
+	}
+
+
 
 	public static Usuario getUser() {
 		return user;

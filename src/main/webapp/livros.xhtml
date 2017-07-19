@@ -13,7 +13,7 @@
 <ui:composition template="/WEB-INF/templates/default.xhtml">
 
 	<h:head>
-		<ui:define name="title">Inicio</ui:define>
+		<ui:define name="title">Livros</ui:define>
 	</h:head>
 
 	<ui:define name="content">
@@ -43,22 +43,22 @@
 		</style>
 		<h:form>
 		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true"/>
-			<p:panel header="Todo o Catálogo"
+			<p:panel header="Livros"
 				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 				<h:panelGrid columns="4"
 					style="width:100%; border: 0px; margin-top: 20px; margin-bottom: 20px; background-color: TRANSPARENT;">
-					<p:dataGrid value="#{indexBean.getCatalogo()}" var="item" columns="3"
+					<p:dataGrid value="#{livrosBean.getLivros()}" var="livro" columns="3"
 						paginator="true"
 						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 						<p:panel style="border: 0px;">
 							<h:panelGrid columns="4">
-								<img src="data:image/png;base64,#{indexBean.getImageContent(item.capa)}" height="250" width="160"/>
+								<img src="data:image/png;base64,#{indexBean.getImageContent(livro.capa)}" height="250" width="160"/>
 								<p:panelGrid columns="1">
-									<p:link value="#{item.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px;">
-										<f:param name="item" value="#{item.id}"></f:param>
+									<p:link value="#{livro.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px;">
+										<f:param name="item" value="#{livro.id}"></f:param>
 									</p:link>
-									<p:outputLabel value="#{('R$ ').concat(item.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
-									<p:outputLabel value="#{item.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
+									<p:outputLabel value="#{('R$ ').concat(livro.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
+									<p:outputLabel value="#{livro.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
 									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" />
 								</p:panelGrid>
 							</h:panelGrid>
