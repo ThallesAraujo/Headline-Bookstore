@@ -59,7 +59,7 @@
 									</p:link>
 									<p:outputLabel value="#{('R$ ').concat(livro.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
 									<p:outputLabel value="#{livro.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
-									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" />
+									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"/>
 								</p:panelGrid>
 							</h:panelGrid>
 						</p:panel>

@@ -108,7 +108,7 @@ public class GenericDAO extends DAO{
 	 public Image find(Long id) {
 		 EntityManager em = getEntityManager();
 	     return em.find(Image.class, id);
-	    }
+	 }
 
 
 }

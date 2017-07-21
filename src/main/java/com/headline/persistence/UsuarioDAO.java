@@ -28,7 +28,26 @@ public class UsuarioDAO extends GenericDAO {
 		}
 	}
 	
+	public Usuario getByLogin(String usuario) throws Exception{
+		
+		EntityManager em = getEntityManager();
+		Usuario resultado = null;
+		try {
+			TypedQuery<Usuario> usuarioQuery = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+			usuarioQuery.setParameter("email", usuario);
+			resultado = usuarioQuery.getSingleResult();
+			return resultado;
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+			throw new Exception("Erro na recuperação do item.", pe);
+		} finally {
+			em.close();
+		}
+	}
+		
+	}
+	
 	
 	
 
-}
+

@@ -1,6 +1,9 @@
 package com.headline.model;
 
+import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,28 +13,20 @@ import javax.persistence.ManyToOne;
 import com.headline.model.usuarios.Usuario;
 
 @Entity
-public class Cartao {
+public class Cartao implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="fk_cliente")
 	private Usuario usuario;
 	
 	private String titular;
-	private LocalDate dataVencimento;
+	private Date dataVencimento;
+	
 	@Id
-	private Integer numero;
+	private BigInteger numero;
 	private short digitosDeSeguranca;
 
 	public Cartao() {};
-
-	public Cartao(String titular, LocalDate dataVencimento, int numero, short digitosDeSeguranca, Usuario usuario) {
-		super();
-		this.titular = titular;
-		this.dataVencimento = dataVencimento;
-		this.numero = numero;
-		this.digitosDeSeguranca = digitosDeSeguranca;
-		this.setUsuario(usuario);
-	}
 
 	public String getTitular() {
 		return titular;
@@ -41,24 +36,24 @@ public class Cartao {
 		this.titular = titular;
 	}
 
-	public LocalDate getDataVencimento() {
-		return dataVencimento;
+	public Date getDataVencimento() {
+		return this.dataVencimento;
 	}
 
-	public void setDataVencimento(LocalDate dataVencimento) {
+	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public int getNumero() {
-		return numero;
+	public BigInteger getNumero() {
+		return this.numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(BigInteger numero) {
 		this.numero = numero;
 	}
 
 	public short getDigitosDeSeguranca() {
-		return digitosDeSeguranca;
+		return this.digitosDeSeguranca;
 	}
 
 	public void setDigitosDeSeguranca(short digitosDeSeguranca) {

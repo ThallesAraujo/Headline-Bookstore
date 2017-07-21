@@ -24,7 +24,7 @@ import com.headline.persistence.GenericDAO;
 
 @ManagedBean
 @ViewScoped
-public class ItemDigitalBean implements Serializable {
+public class ItemDigitalBean extends UsuarioOperations implements Serializable {
 
 	private GenericDAO dao;
 	
@@ -89,7 +89,7 @@ public class ItemDigitalBean implements Serializable {
 		if (item.getCapa() != null) {
 			if (item.getArquivo() != null) {
 				try{
-					item.setAutor(DashboardLoader.getUser().getNome());
+					item.setAutor(getUsuarioLogado().getNome());
 					item.setProdutor(headline);
 					dao.save(item);
 				}catch(Exception  e){

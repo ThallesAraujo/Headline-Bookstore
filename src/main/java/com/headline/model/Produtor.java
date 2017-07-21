@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.headline.model.itens.Item;
 import com.headline.model.usuarios.Usuario;
@@ -19,11 +23,13 @@ import com.headline.model.usuarios.Usuario;
 @DiscriminatorValue(value="Produtor")
 public class Produtor extends Usuario{
 	
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT) 
 	@JoinColumn(name="fk_produtor")
 	private List<Promocao> promocoes;
 	
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT) 
 	private List<Item> itens;
 	
 	@ManyToOne
@@ -64,6 +70,11 @@ public class Produtor extends Usuario{
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+
+	@Override
+	public String loadDashboard() {
+		return "producer_dashboard?faces-redirect=true";
 	}
 
 	

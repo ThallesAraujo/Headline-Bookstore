@@ -56,7 +56,7 @@
 						<p:outputLabel value="#{('Sinopse: ').concat(itemSelecionado.item.resumo)}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
 						<p:outputLabel value="#{itemSelecionado.item.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
 						<p:outputLabel value="#{('Editora: ').concat(itemSelecionado.item.produtor.nome)}" style="font-size:1em; color: #B7AFA3;"></p:outputLabel>
-						<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" />
+						<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"/>
 					</p:panelGrid>
 				</p:panelGrid>
 			</p:panel>

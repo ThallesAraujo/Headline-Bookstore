@@ -11,11 +11,10 @@ import com.headline.persistence.GenericDAO;
 
 @ManagedBean
 @ViewScoped
-public class DefaultUser {
+public class DefaultUser extends UsuarioOperations {
 
 	private Cliente cliente;
 	private GenericDAO dao;
-	private DashboardLoader loader;
 	
 	@PostConstruct
 	public void initialize(){
@@ -25,9 +24,10 @@ public class DefaultUser {
 	
 	public String salvarCliente(){
 		try{
+			String senha = criptografarSenha(cliente.getSenha());
+			cliente.setSenha(senha);
 			dao.save(cliente);
-			loader.setUser(cliente);
-			return loader.loadDashboard(cliente);
+			return cliente.loadDashboard();
 		}catch(Exception e){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
 			return null;

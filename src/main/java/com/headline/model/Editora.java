@@ -3,6 +3,7 @@ package com.headline.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -17,7 +18,7 @@ public class Editora{
 	
 	private String email;
 	
-	@OneToMany (mappedBy="editora")
+	@OneToMany (mappedBy="editora", fetch= FetchType.EAGER)
 	private List<Produtor> funcionarios;
 	
 	private String cep;

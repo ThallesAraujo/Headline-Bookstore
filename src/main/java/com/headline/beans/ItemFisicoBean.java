@@ -25,7 +25,7 @@ import com.headline.persistence.GenericDAO;
 
 @ManagedBean
 @ViewScoped
-public class ItemFisicoBean implements Serializable {
+public class ItemFisicoBean extends UsuarioOperations implements Serializable {
 
 	private Fisico item;
 	
@@ -67,6 +67,8 @@ public class ItemFisicoBean implements Serializable {
 
 		if (item.getCapa() != null) {
 				try{
+					item.setAutor(getUsuarioLogado().getNome());
+					item.setProdutor(headline);
 					dao.save(item);
 				}catch(Exception  e){
 					e.printStackTrace();

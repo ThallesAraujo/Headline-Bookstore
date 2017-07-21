@@ -74,13 +74,17 @@ html {
 						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)" />
 				</p:inputText>
 				
-				<p:password placeholder="Digite sua Senha"
-					style="min-width:90%;" value="#{studentAccount.estudante.senha}" required="true"
+				<p:password placeholder="Digite sua Senha" style="min-width:90%" match="confirmacaoSenha" feedback="true" redisplay="true" required="true"></p:password>
+				
+				<p:password id="confirmacaoSenha" placeholder="Digite Novamente a Senha" style="min-width:90%"
+					value="#{studentAccount.estudante.senha}" required="true"
+					feedback="true" redisplay="true"
 					requiredMessage="Informe a senha que será utilizada no login"></p:password>
+				
 
 				<p:outputLabel value="Instituição de Ensino"></p:outputLabel>
 				<p:inputText placeholder="Nome da Instituição" style="min-width:90%"
-					value="#{studentAccount.instituicao}" required="true" 
+					value="#{studentAccount.estudante.instituicao}" required="true" 
 					requiredMessage="Por favor, informe o nome completo da instituição de ensino onde você estuda"></p:inputText>
 
 				<p:commandButton value="Concluir Cadastro"

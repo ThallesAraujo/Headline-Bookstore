@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="headline_bs" transaction-type="RESOURCE_LOCAL">
+	
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<non-jta-data-source>jdbc/Headline</non-jta-data-source>
+		
 		<class>com.headline.model.usuarios.Usuario</class>
 		<class>com.headline.model.usuarios.Cliente</class>
 		<class>com.headline.model.usuarios.Estudante</class>
@@ -17,11 +20,6 @@
 		<class>com.headline.model.itens.Item</class>
 		
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/headline_bs?useSSL=false&amp;serverTimezone=GMT-3" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
-			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
-			<property name="hibernate.connection.username" value="root" />
-			<property name="hibernate.connection.password" value="root" />
 			<property name="hibernate.default_catalog" value="headline_bs" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />

@@ -52,14 +52,14 @@
 						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 						<p:panel style="border: 0px;">
 							<h:panelGrid columns="4">
-								<img src="data:image/png;base64,#{indexBean.getImageContent(item.capa)}" height="250" width="160"/>
+								<img src="data:image/png;base64,#{indexBean.getImageContent(item.capa)}" height="250" width="160" style="box-shadow: 0 2px 2px #000000;"/>
 								<p:panelGrid columns="1">
-									<p:link value="#{item.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px;">
+									<p:link value="#{item.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);">
 										<f:param name="item" value="#{item.id}"></f:param>
 									</p:link>
-									<p:outputLabel value="#{('R$ ').concat(item.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
-									<p:outputLabel value="#{item.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
-									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" />
+									<p:outputLabel value="#{('R$ ').concat(item.preco)}" style="font-size:1.5em; color: #FFFFFF; text-shadow: 0 2px 2px rgba(0,0,0,0.8);"></p:outputLabel>
+									<p:outputLabel value="#{item.autor}" style="font-size:1em; color: #B7AFA3 ; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}" />
 								</p:panelGrid>
 							</h:panelGrid>
 						</p:panel>

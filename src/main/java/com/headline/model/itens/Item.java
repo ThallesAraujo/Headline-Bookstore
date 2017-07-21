@@ -1,5 +1,6 @@
 package com.headline.model.itens;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.DiscriminatorColumn;
@@ -22,7 +23,7 @@ import com.headline.model.Produtor;
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="Tipo")
-public class Item {
+public class Item implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -39,7 +40,7 @@ public class Item {
 	
 	private BigDecimal preco;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Editora produtor;
 	
 	@Lob

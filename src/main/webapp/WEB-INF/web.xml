@@ -48,4 +48,148 @@
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<!-- JAAS -->
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error_403.xhtml</location>
+	</error-page>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>headlineJdbcRealm</realm-name>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/error_403.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-constraint>
+		<display-name>Administrative Access</display-name>
+		<web-resource-collection>
+			<web-resource-name>Only Application Admins</web-resource-name>
+			<description></description>
+			<url-pattern>/new_digital_item.xhtml</url-pattern>
+			<url-pattern>/new_physical_item.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>Administrador</role-name>
+			<role-name>Produtor</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<display-name>Customer Access</display-name>
+		<web-resource-collection>
+			<web-resource-name>Customer Dashboard</web-resource-name>
+			<description />
+			<url-pattern>/customer_dashboard.xhtml</url-pattern>
+			<url-pattern>/new_payment_method.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>Estudante</role-name>
+			<role-name>Cliente</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<display-name>Administrative Access</display-name>
+		<web-resource-collection>
+			<web-resource-name>Administrative Dashboard</web-resource-name>
+			<description />
+			<url-pattern>/administrative_dashboard.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>Administrador</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<display-name>Producer Access</display-name>
+		<web-resource-collection>
+			<web-resource-name>Producer Dashboard</web-resource-name>
+			<description />
+			<url-pattern>/producer_dashboard.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>Produtor</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Producer Access</display-name>
+		<web-resource-collection>
+			<web-resource-name>Producer Dashboard</web-resource-name>
+			<description />
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-role>
+		<role-name>Administrador</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Produtor</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Estudante</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Cliente</role-name>
+	</security-role>
+	
 </web-app>

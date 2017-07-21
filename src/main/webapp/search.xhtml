@@ -13,7 +13,7 @@
 <ui:composition template="/WEB-INF/templates/default.xhtml">
 
 	<h:head>
-		<ui:define name="title">Periódicos</ui:define>
+		<ui:define name="title">Pesquisa</ui:define>
 	</h:head>
 
 	<ui:define name="content">
@@ -43,22 +43,22 @@
 		</style>
 		<h:form>
 		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true"/>
-			<p:panel header="Periódicos"
+			<p:panel header="Resultados da Pesquisa"
 				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 				<h:panelGrid columns="4"
 					style="width:100%; border: 0px; margin-top: 20px; margin-bottom: 20px; background-color: TRANSPARENT;">
-					<p:dataGrid value="#{periodicosBean.getPeriodicos()}" var="periodico" columns="3"
+					<p:dataGrid value="#{searchBean.getResultSearch()}" var="item" columns="3"
 						paginator="true"
 						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 						<p:panel style="border: 0px;">
 							<h:panelGrid columns="4">
-								<img src="data:image/png;base64,#{indexBean.getImageContent(periodico.capa)}" height="250" width="160"/>
+								<img src="data:image/png;base64,#{indexBean.getImageContent(item.capa)}" height="250" width="160"/>
 								<p:panelGrid columns="1">
-									<p:link value="#{periodico.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px;">
-										<f:param name="item" value="#{periodico.id}"></f:param>
+									<p:link value="#{item.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px;">
+										<f:param name="item" value="#{item.id}"></f:param>
 									</p:link>
-									<p:outputLabel value="#{('R$ ').concat(periodico.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
-									<p:outputLabel value="#{periodico.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
+									<p:outputLabel value="#{('R$ ').concat(item.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
+									<p:outputLabel value="#{item.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
 									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"/>
 								</p:panelGrid>
 							</h:panelGrid>

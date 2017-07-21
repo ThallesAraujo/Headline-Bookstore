@@ -86,10 +86,9 @@ public class ProdutorBean {
 				editora.setFuncionarios(Arrays.asList(produtor));
 				dao.save(editora);
 				dao.save(produtor);
-				return DashboardLoader.loadDashboard(produtor);
+				return produtor.loadDashboard();
 			}catch(Exception e){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-				return null;
 			}
 		}else{
 			try{
@@ -100,12 +99,13 @@ public class ProdutorBean {
 				editora.setFuncionarios(Arrays.asList(produtor));
 				dao.save(editora);
 				dao.save(produtor);
-				return DashboardLoader.loadDashboard(produtor);
+				produtor.loadDashboard();
 			}catch(Exception e){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-				return null;
 			}
 		}
+		
+		return null;
 	}
 	
 	

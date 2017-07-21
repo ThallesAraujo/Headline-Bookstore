@@ -28,7 +28,7 @@ import java.nio.file.Path;
 
 @ManagedBean
 @ViewScoped
-public class IndexBean {
+public class IndexBean{
 	
 	private GenericDAO dao;
 	

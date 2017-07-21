@@ -66,8 +66,11 @@ html {
 						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)" />
 				</p:inputText>
 				
-				<p:password placeholder="Digite sua Senha" style="min-width:90%"
+				<p:password id="senha" placeholder="Digite sua Senha" style="min-width:90%" match="confirmacaoSenha" feedback="true" redisplay="true" required="true" ></p:password>
+				
+				<p:password id="confirmacaoSenha" placeholder="Digite Novamente a Senha" style="min-width:90%"
 					value="#{defaultUser.cliente.senha}" required="true"
+					feedback="true" redisplay="true"
 					requiredMessage="Informe a senha que será utilizada no login"></p:password>
 				<p:commandButton value="Concluir Cadastro"
 					action="#{defaultUser.salvarCliente()}"></p:commandButton>

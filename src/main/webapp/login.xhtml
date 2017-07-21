@@ -26,17 +26,17 @@ html {
 }
 
 </style>
-	<h:form>
+	<h:form prependId="false" onsubmit="action='j_security_check';">
 	<p:growl id="message" showDetail="true" life="3000" autoUpdate="true"/>
 	<p:panelGrid columns="1" styleClass="ui-noborder" style="margin-top: 10%; margin-left:3%; min-width:30%; min-height:50%;">
 		<p:link outcome="index?faces-redirect=true">
 				<h:graphicImage library="imagesandlogos" name="logotipo.png"
 					style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
 			</p:link>
-		<p:inputText id="username" placeholder="Nome de usuário ou email" value="#{login.usuario}" style="width:95%;"></p:inputText>
-		<p:password id="password" placeholder="Senha" value="#{login.senha}" style="width:95%;" ></p:password>
+		<p:inputText id="j_username" placeholder="Nome de usuário ou email" style="width:95%;"></p:inputText>
+		<p:password id="j_password" placeholder="Senha" style="width:95%;" ></p:password>
 		<p:panelGrid columns="2">
-			<p:commandButton id="bt_logar" value="Entrar" style="margin-left:0px" action="#{login.logIn()}"></p:commandButton>
+			<p:commandButton id="bt_logar" value="Entrar" ajax="false" style="margin-left:0px" />
 			<p:link id="bt_cadastro" value="Cadastre-se" outcome="#{cadastro.loadInit()}"></p:link>
 		</p:panelGrid>
 	</p:panelGrid>

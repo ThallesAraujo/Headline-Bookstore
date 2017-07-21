@@ -1,10 +1,12 @@
 package com.headline.persistence;
 
+import java.io.Serializable;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public abstract class DAO {
+public abstract class DAO implements Serializable {
 
 	static EntityManagerFactory emf;
 	

@@ -1,6 +1,10 @@
 package com.headline.beans;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -13,23 +17,17 @@ import com.headline.persistence.GenericDAO;
 
 @ManagedBean
 @SessionScoped
-public class StudentAccount implements Serializable{
+public class StudentAccount extends UsuarioOperations implements Serializable{
 	
 	private Estudante estudante;
 	
 	private GenericDAO dao;
-	
-	private DashboardLoader loader;
-	
-	private String instituicao;
 	
 	@PostConstruct
 	public void initialize(){
 		
 		estudante = new Estudante();
 		dao = new GenericDAO();
-		loader = new DashboardLoader();
-		instituicao = new String();
 		
 	}
 	
@@ -37,30 +35,16 @@ public class StudentAccount implements Serializable{
 	public String salvarConta(){
 		
 		try{
-			loader.setUser(estudante);
-			dao.save(instituicao);
+			String senha = criptografarSenha(estudante.getSenha());
+			estudante.setSenha(senha);
 			dao.save(estudante);
-			return loader.loadDashboard(estudante);
+			return estudante.loadDashboard();
 		}catch(Exception e){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
 			return null;
 		}
 		
 	}
-	
-	
-
-	public String getInstituicao() {
-		return instituicao;
-	}
-
-
-
-	public void setInstituicao(String instituicao) {
-		this.instituicao = instituicao;
-	}
-
-
 
 	public Estudante getEstudante() {
 		return estudante;

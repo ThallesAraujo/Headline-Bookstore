@@ -10,7 +10,7 @@ import javassist.expr.Instanceof;
 
 @ManagedBean
 @ViewScoped
-public class ItemSelecionado {
+public class ItemSelecionado extends UsuarioOperations{
 	
 	private Item item;
 	
@@ -19,7 +19,7 @@ public class ItemSelecionado {
 			((Fisico) item).setQuantidadeEmEstoque(((Fisico) item).getQuantidadeEmEstoque()-1);
 			//dao.update(item)
 		}
-		DashboardLoader.getCarrinho().add(item);
+		
 	}
 
 	public Item getItem() {

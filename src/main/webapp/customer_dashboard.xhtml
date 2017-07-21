@@ -39,9 +39,19 @@ html {
 }
 </style>
 
-		<div style="border-color: TRANSPARENT; background-color: TRANSPARENT; padding: 0.5em;">
-			<p:outputLabel style="font-size:1.3em; color: #6D929B; padding: 0.5em;" value="Dashboard - Cliente"></p:outputLabel>
+		<div
+			style="border-color: TRANSPARENT; background-color: TRANSPARENT; padding: 0.5em;">
+			<p:outputLabel
+				style="font-size:1.3em; color: #6D929B; padding: 0.5em;"
+				value="Dashboard - Cliente"></p:outputLabel>
 			<h:form>
+				<p:panel header="Itens" style="background-color: TRANSPARENT;">
+					<p:panelGrid columns="1"
+						style="border:0px; border-color: TRANSPARENT; background-color: TRANSPARENT;">
+						<p:commandButton value="Adicionar Cartão"
+							action="#{cartaoBean.load()}"></p:commandButton>
+					</p:panelGrid>
+				</p:panel>
 			</h:form>
 		</div>
 	</ui:define>
