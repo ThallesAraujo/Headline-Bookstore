@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web"
+	rel="stylesheet" />
+<h:outputStylesheet
+	name="webjars/font-awesome/4.4.0/css/font-awesome.css" />
+
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="ent" value="#{detalhesDaEntrega.ent}" />
+	</f:metadata>
+
+	<h:head>
+		<ui:define name="title">Entrega - Headline Bookstore</ui:define>
+	</h:head>
+
+	<ui:define name="content">
+		<style type="text/css">
+html {
+	position: relative;
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: .5em 1em .3em;
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-top {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-bottom {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-list{
+	background-color: WHITE;
+}
+</style>
+		<h:form>
+			<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+			<p:panel
+				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+
+				<p:panelGrid columns="1">
+					<p:outputLabel value="Detalhes da Entrega"
+
+						style="font-size:2em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);">
+					</p:outputLabel>
+					<p:outputLabel
+						value="#{('Cliente: ').concat(detalhesDaEntrega.ent.compra.cliente.nome)}"></p:outputLabel>
+					<p:outputLabel
+						value="#{('Endereço: ').concat(detalhesDaEntrega.ent.compra.cliente.logradouro)}"></p:outputLabel>
+					<p:outputLabel
+						value="#{detalhesDaEntrega.ent.compra.cliente.cep.concat(' - ').concat(detalhesDaEntrega.ent.compra.cliente.cidade).concat(' / ').concat(detalhesDaEntrega.ent.compra.cliente.estado)}"></p:outputLabel>
+
+					<p:outputLabel value="Itens Comprados:"
+						outcome="#{itemSelecionado.load()}"
+						style="font-size:1.5em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+
+					<p:dataTable id="ls_itens" var="item"
+						value="#{detalhesDaEntrega.ent.compra.itens}">
+						<p:column headerText="Título" style="text-align: center;">
+							<p:outputLabel value="#{item.titulo}"></p:outputLabel>
+						</p:column>
+						<p:column headerText="Autor" style="text-align: center;">
+							<p:outputLabel value="#{item.autor}"></p:outputLabel>
+						</p:column>
+						<p:column headerText="Editora" style="text-align: center;">
+							<p:outputLabel value="#{item.produtor.nome}"></p:outputLabel>
+						</p:column>
+						<p:column headerText="Categoria" style="text-align: center;">
+							<p:outputLabel value="#{item.categoria.getDescricao()}"></p:outputLabel>
+						</p:column>
+						<p:column headerText="Gênero" style="text-align: center;">
+							<p:outputLabel value="#{item.genero.getNome()}"></p:outputLabel>
+						</p:column>
+						<p:column headerText="Preço" style="text-align: center;">
+							<p:outputLabel value="#{item.preco}"></p:outputLabel>
+						</p:column>
+
+					</p:dataTable>
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel
+							id="lb_state"
+							value="#{('Estado de Entrega: ').concat(detalhesDaEntrega.ent.status.getStatus())}"
+							outcome="#{itemSelecionado.load()}"
+							style="font-size:1.5em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+
+						<p:commandButton value="Alterar Estado"
+						style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+							onclick="PF('dialog').show();"></p:commandButton>
+
+						<p:dialog widgetVar="dialog" showEffect="clip" hideEffect="clip"
+							style="background-color:#FFFFFF;">
+
+							<p:panelGrid columns="1">
+								<p:outputLabel value="Selecionar novo estado da entrega:"></p:outputLabel>
+								<p:selectOneMenu value="#{detalhesDaEntrega.status}">
+									<f:selectItems value="#{detalhesDaEntrega.getStates()}"
+										var="status" itemValue="#{status}" itemLabel="#{status.getStatus()}"></f:selectItems>
+								</p:selectOneMenu>
+
+								<p:panelGrid columns="2">
+									<p:commandButton value="Selecionar e Concluir"
+									style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+										oncomplete="PF('dialog').hide()" icon="ui-icon-check"
+										action="#{detalhesDaEntrega.mudarStatus()}"
+										update="lb_state"
+										/>
+									<p:commandButton value="Cancelar" type="button"
+									style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:panelGrid>
+
+							</p:panelGrid>
+
+						</p:dialog>
+					</p:panelGrid>
+				</p:panelGrid>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

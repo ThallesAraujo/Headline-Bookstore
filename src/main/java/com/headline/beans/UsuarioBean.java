@@ -1,23 +1,22 @@
 package com.headline.beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.Principal;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import com.headline.model.usuarios.Cliente;
-import com.headline.model.usuarios.Usuario;
-import com.headline.persistence.UsuarioDAO;
 
-@ManagedBean
+@Named
 @RequestScoped
-public class UsuarioBean extends UsuarioOperations{
+public class UsuarioBean extends UsuarioOperations implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	public void logout() throws IOException {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
@@ -40,6 +39,5 @@ public class UsuarioBean extends UsuarioOperations{
 		ExternalContext externalContext = facesContext.getExternalContext();
 		return externalContext.isUserInRole(type);
 	}
-	
 	
 }

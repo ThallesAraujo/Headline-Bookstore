@@ -1,6 +1,8 @@
 package com.headline.model;
 
-public enum Status {
+import java.io.Serializable;
+
+public enum Status implements Serializable{
 	
 	PENDENTE("Pendente"),
 	EM_TRANSPORTE("Em Transporte"),

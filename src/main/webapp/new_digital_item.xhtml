@@ -20,6 +20,10 @@ html {
 	background: url("#{resource['/imagesandlogos/background.jpg']}");
 	background-size: 100%;
 }
+
+.ui-inputfield {
+	border-radius: 10px;
+}
 </style>
 	<h:form>
 		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
@@ -54,29 +58,27 @@ html {
 				
 				<p:outputLabel value="Resumo: "></p:outputLabel>
 				<p:inputTextarea value="#{itemDigitalBean.item.resumo}" style="min-width:450px"/>
+				
+				<p:outputLabel value="Autor: " rendered="#{produtorBean.getUsuarioLogadoAsProducer().funcionarioEditora}"></p:outputLabel>
+				<p:inputText value="#{itemDigitalBean.item.autor}" rendered="#{produtorBean.getUsuarioLogadoAsProducer().funcionarioEditora}" style="min-width:450px"/>
 
-				<p:outputLabel value="Preço (R$):"></p:outputLabel>
-				<p:inputMask mask="999.99" value="#{itemDigitalBean.item.preco}"
+				<p:outputLabel value="Link para o arquivo (Google Drive, Dropbox, etc):"></p:outputLabel>
+				<p:inputText mask="999.99" value="#{itemDigitalBean.item.arquivo}"
 					required="true"
-					requiredMessage="É necessário atribuir um preço ao item" style="min-width:450px"></p:inputMask>
+					requiredMessage="É necessário informar o link para download do item" style="min-width:450px"></p:inputText>
 			</p:panelGrid>
 
 			<p:outputLabel id="lb_nomeCapa"
 					value="${itemDigitalBean.capa !=null? ('Capa enviada: ').concat(itemDigitalBean.capa.getFileName()) : ''}"></p:outputLabel>
 			<p:fileUpload mode="advanced"
+				style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
 				fileUploadListener="#{itemDigitalBean.uploadCapa}" auto="true"
 				label="Arquivo de capa (JPG, PNG ou JPEG)" update="lb_nomeCapa"></p:fileUpload>
 		
-			<p:outputLabel id="lb_nomeArquivo"
-					value="${itemDigitalBean.arquivo !=null? ('Arquivo enviado: ').concat(itemDigitalBean.capa.getFileName()) : ''}"></p:outputLabel>	
-			<p:fileUpload mode="advanced"
-				fileUploadListener="#{itemDigitalBean.uploadArquivo}"
-			 	auto="true" label="Arquivo PDF ou EPUB do item"
-			 	update="lb_nomeArquivo"
-				></p:fileUpload>
 			
 
 			<p:commandButton value="Salvar Item"
+				style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
 				action="#{itemDigitalBean.salvarItem()}"></p:commandButton>
 		</p:panelGrid>
 	</h:form>

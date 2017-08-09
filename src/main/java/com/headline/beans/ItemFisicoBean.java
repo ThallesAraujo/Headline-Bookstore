@@ -2,30 +2,27 @@ package com.headline.beans;
 
 //
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import com.headline.model.Editora;
 import com.headline.model.itens.Categoria;
-import com.headline.model.itens.Digital;
 import com.headline.model.itens.Fisico;
 import com.headline.model.itens.Genero;
 import com.headline.persistence.GenericDAO;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class ItemFisicoBean extends UsuarioOperations implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Fisico item;
 	
@@ -33,13 +30,12 @@ public class ItemFisicoBean extends UsuarioOperations implements Serializable {
 	
 	private UploadedFile capa;
 	
-	private Editora headline;
-
 	@PostConstruct
-	public void instantiate() {
+	public void initialize() {
 		dao = new GenericDAO();
 		item = new Fisico();
 	}
+
 
 	public Fisico getItem() {
 		return item;
@@ -67,8 +63,10 @@ public class ItemFisicoBean extends UsuarioOperations implements Serializable {
 
 		if (item.getCapa() != null) {
 				try{
-					item.setAutor(getUsuarioLogado().getNome());
-					item.setProdutor(headline);
+					if(!getUsuarioLogadoAsProducer().isFuncionarioEditora()) {
+						item.setAutor(getUsuarioLogado().getNome());
+					}
+					item.setProdutor(getUsuarioLogadoAsProducer().getEditora());
 					dao.save(item);
 				}catch(Exception  e){
 					e.printStackTrace();
@@ -101,14 +99,6 @@ public class ItemFisicoBean extends UsuarioOperations implements Serializable {
 
 	public void setCapa(UploadedFile capa) {
 		this.capa = capa;
-	}
-
-	public Editora getHeadline() {
-		return headline;
-	}
-
-	public void setHeadline(Editora headline) {
-		this.headline = headline;
 	}
 	
 	

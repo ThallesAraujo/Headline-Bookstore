@@ -22,34 +22,90 @@ html {
 	background: url("#{resource['/imagesandlogos/background.jpg']}");
 	background-size: 100%;
 }
+
 .ui-panel .ui-panel-titlebar {
 	padding: 0.5em 1.7em .3em;
 	border-color: TRANSPARENT;
 	background-color: TRANSPARENT;
 }
+
 .ui-panelgrid .ui-panelgrid-cell {
 	border-color: TRANSPARENT;
 	background-color: TRANSPARENT;
 }
+
 .ui-widget-content {
 	background-color: TRANSPARENT;
 }
 </style>
 
-		<div style="border-color: TRANSPARENT; background-color: TRANSPARENT; padding: 0.5em;">
-			<p:outputLabel style="font-size:1.3em; color: #6D929B; padding: 0.5em;" value="Dashboard - Administrador"></p:outputLabel>
+		<div
+			style="border-color: TRANSPARENT; background-color: TRANSPARENT; padding: 0.5em;">
+			<p:outputLabel
+				style="font-size:1.3em; color: #6D929B; padding: 0.5em;"
+				value="Dashboard - Administrador"></p:outputLabel>
 			<h:form>
 				<p:panelGrid columns="3"
 					style="border-color: TRANSPARENT; background-color: TRANSPARENT; margin-top: 1.5em; margin-bottom: 1.5em; ">
 					<p:panel header="Itens" style="background-color: TRANSPARENT;">
 						<p:panelGrid columns="1"
 							style="border:0px; border-color: TRANSPARENT; background-color: TRANSPARENT;">
-							<p:commandButton value="Fazer upload de item digital"
-								action="#{admDashboard.loadNewDigitalItem()}"></p:commandButton>
-							<p:commandButton value="Fazer upload de item físico"
-								action="#{admDashboard.loadNewPhysicalItem()}"></p:commandButton>
+							<p:commandButton value="Adic. Item Digital"
+							style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+								action="#{administradorBean.loadNewDigitalItem()}"></p:commandButton>
+							<p:commandButton value="Adic. Item Físico"
+							style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+								action="#{administradorBean.loadNewPhysicalItem()}"></p:commandButton>
 						</p:panelGrid>
 					</p:panel>
+
+					<p:panel header="Entregas" icon="fa fa-truck"
+						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+
+						<p:dataTable id="ls_entregas" var="entrega"
+							value="#{administradorBean.getEntregas()}">
+							<p:column headerText="Número da Compra"
+								style="text-align: center;">
+								<h:outputText value="#{entrega.compra.id}" />
+							</p:column>
+
+							<p:column headerText="Cliente" style="text-align: center;">
+								<h:outputText value="#{entrega.compra.cliente.nome}" />
+							</p:column>
+
+							<p:column headerText="CEP" style="text-align: center;">
+								<h:outputText value="#{entrega.compra.cliente.cep}" />
+							</p:column>
+
+							<p:column headerText="Cidade" style="text-align: center;">
+								<h:outputText value="#{entrega.compra.cliente.cidade}" />
+							</p:column>
+
+							<p:column headerText="Estado" style="text-align: center;">
+								<h:outputText value="#{entrega.compra.cliente.estado}" />
+							</p:column>
+
+							<p:column headerText="Logradouro" style="text-align: center;">
+								<h:outputText value="#{entrega.compra.cliente.logradouro}" />
+							</p:column>
+
+							<p:column headerText="Status da Entrega"
+								style="text-align: center;">
+										<p:outputLabel value="#{entrega.status.getStatus()}"></p:outputLabel>
+								</p:column>
+
+								<p:column headerText="Previsão de Chegada"
+									style="text-align: center;">
+									<h:outputText value="#{entrega.previsao}" />
+								</p:column>
+								<p:column>
+									<p:link value="Detalhes" icon="fa fa-mail-forward" outcome="#{detalhesDaEntrega.load()}">
+										<f:param name="ent" value="#{entrega.id}"></f:param>
+									</p:link>
+								</p:column>
+						</p:dataTable>
+					</p:panel>
+
 				</p:panelGrid>
 			</h:form>
 		</div>

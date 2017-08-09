@@ -18,13 +18,15 @@
 		<class>com.headline.model.itens.Digital</class>
 		<class>com.headline.model.itens.Fisico</class>
 		<class>com.headline.model.itens.Item</class>
+		<class>com.headline.model.Carrinho</class>
+		<class>com.headline.model.Estante</class>
 		
 		<properties>
 			<property name="hibernate.default_catalog" value="headline_bs" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="true" />
+			<!-- <property name="hibernate.show_sql" value="true" /> -->
 			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.use_sql_comments" value="true" />
+			<!-- <property name="hibernate.use_sql_comments" value="true" /> -->
 		</properties>
 		
 	</persistence-unit>

@@ -20,6 +20,10 @@ html {
 	background: url("#{resource['/imagesandlogos/background.jpg']}");
 	background-size: 100%;
 }
+
+.ui-inputfield {
+	border-radius: 10px;
+}
 </style>
 	<h:form>
 		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
@@ -55,6 +59,9 @@ html {
 				<p:outputLabel value="Resumo: "></p:outputLabel>
 				<p:inputTextarea value="#{itemFisicoBean.item.resumo}" style="min-width:450px"/>
 				
+				<p:outputLabel value="Autor: " rendered="#{produtorBean.getUsuarioLogadoAsProducer().funcionarioEditora}"></p:outputLabel>
+				<p:inputText value="#{itemFisicoBean.item.autor}" rendered="#{produtorBean.getUsuarioLogadoAsProducer().funcionarioEditora}" style="min-width:450px"/>
+				
 				<p:outputLabel value="Quantidade em estoque: "></p:outputLabel>
 				<p:inputText value="#{itemFisicoBean.item.quantidadeEmEstoque}"
 					required="true"
@@ -70,11 +77,13 @@ html {
 			<p:outputLabel id="lb_nomeCapa"
 					value="${itemFisicoBean.capa !=null? ('Capa enviada: ').concat(itemFisicoBean.capa.getFileName()) : ''}"></p:outputLabel>
 			<p:fileUpload mode="advanced"
+				style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
 					fileUploadListener="#{itemFisicoBean.uploadCapa}" auto="true"
 					label="Arquivo de capa (JPG, PNG ou JPEG)" update="lb_nomeCapa"></p:fileUpload>
 		
 
 				<p:commandButton value="Salvar Item"
+					style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
 					action="#{itemFisicoBean.salvarItem()}"></p:commandButton>
 
 		</p:panelGrid>

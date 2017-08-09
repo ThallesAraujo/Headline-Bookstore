@@ -1,21 +1,17 @@
 package com.headline.model.usuarios;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.headline.model.Cartao;
-import com.headline.model.Compra;
-import com.headline.model.itens.Item;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue(value="Estudante")
-public class Estudante extends Cliente{
+public class Estudante extends Cliente implements Serializable{
+	
+	@Transient
+	private static final long serialVersionUID = 1L;
 	
 	private String instituicao;
 	

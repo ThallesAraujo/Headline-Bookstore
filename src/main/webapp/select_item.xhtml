@@ -12,9 +12,9 @@
 
 <ui:composition template="/WEB-INF/templates/default.xhtml">
 
-<f:metadata>
-		<f:viewParam name="item" value="#{itemSelecionado.item}"/>
-</f:metadata>
+	<f:metadata>
+		<f:viewParam name="it" value="#{itemSelecionado.it}" />
+	</f:metadata>
 
 	<h:head>
 		<ui:define name="title">Detalhes - Headline Bookstore</ui:define>
@@ -22,41 +22,60 @@
 
 	<ui:define name="content">
 		<style type="text/css">
-			
-			html {
-				position: relative;
-				background: url("#{resource['/imagesandlogos/background.jpg']}");
-				background-size: 100%;
-				background-repeat: no-repeat;
-			}
-		
-			.ui-panel .ui-panel-titlebar {
-				padding: .5em 1em .3em;
-				border-color: TRANSPARENT;
-				background-color: TRANSPARENT;
-			}
-			
-			.ui-paginator.ui-paginator-top {
-				border-color: TRANSPARENT;
-				background-color: TRANSPARENT;
-			}
-			.ui-paginator.ui-paginator-bottom {
-				border-color: TRANSPARENT;
-				background-color: TRANSPARENT;
-			}
-		</style>
+html {
+	position: relative;
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: .5em 1em .3em;
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-top {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-bottom {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+</style>
 		<h:form>
-		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true"/>
-			<p:panel style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
-				<p:outputLabel style="font-size:2em; color: #6D929B; padding: 0.5em;" value="#{itemSelecionado.item.titulo}"></p:outputLabel>
+			<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+			<p:panel
+				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+				<p:outputLabel
+					style="font-size:2em; color: #6D929B; padding: 0.5em;"
+					value="#{itemSelecionado.it.titulo}"></p:outputLabel>
 				<p:panelGrid columns="2">
-					<img src="data:image/png;base64,#{indexBean.getImageContent(itemSelecionado.item.capa)}" height="250" width="160"/>
+					<img
+						src="data:image/png;base64,#{indexBean.getImageContent(itemSelecionado.it.capa)}"
+						height="250" width="160" />
 					<p:panelGrid columns="1">
-					<p:outputLabel value="#{('R$ ').concat(itemSelecionado.item.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
-						<p:outputLabel value="#{('Sinopse: ').concat(itemSelecionado.item.resumo)}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
-						<p:outputLabel value="#{itemSelecionado.item.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
-						<p:outputLabel value="#{('Editora: ').concat(itemSelecionado.item.produtor.nome)}" style="font-size:1em; color: #B7AFA3;"></p:outputLabel>
-						<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"/>
+						<p:outputLabel
+							value="#{itemSelecionado.it.getClass().getSimpleName().equals('Digital')?'Gratuito':('R$ ').concat(itemSelecionado.it.preco)}"
+							style="font-size:1.5em; color: #FFFFFF; text-shadow: 0 2px 2px rgba(0,0,0,0.8);"></p:outputLabel>
+
+						<p:outputLabel
+							value="#{('Sinopse: ').concat(itemSelecionado.it.resumo)}"
+							style="font-size:1em; color: #B7AFA3 ; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+						<p:outputLabel value="#{('Autor: ').concat(itemSelecionado.it.autor)}"
+							style="font-size:1em; color: #B7AFA3 ; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+						<p:outputLabel
+							value="#{('Editora: ').concat(itemSelecionado.it.produtor.nome)}"
+							style="font-size:1em; color: #B7AFA3 ; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+						<p:commandButton
+							style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+							value="#{itemSelecionado.it.isEmFalta()? 'Item em falta': 'Adicionar ao carrinho'}"
+							icon="fa fa-shopping-cart"
+							action="#{itemSelecionado.adicionarAoCarrinho(it)}"
+							rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"
+							disabled="#{itemSelecionado.it.isEmFalta()}" />
 					</p:panelGrid>
 				</p:panelGrid>
 			</p:panel>

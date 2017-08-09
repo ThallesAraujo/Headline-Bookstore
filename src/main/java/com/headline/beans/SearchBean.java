@@ -4,26 +4,27 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 import com.headline.model.itens.Item;
 import com.headline.persistence.ItemDAO;
 
-@ManagedBean
+@Named
 @SessionScoped
 public class SearchBean implements Serializable {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	private ItemDAO dao;
 
 	private String searchTerms;
 	
-	
 	@PostConstruct
-	public void initialize(){
+	public void initialize() {
 		dao = new ItemDAO();
 	}
+	
 	
 	public String getSearchTerms() {
 		return searchTerms;

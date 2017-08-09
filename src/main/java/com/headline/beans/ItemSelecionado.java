@@ -1,37 +1,43 @@
 package com.headline.beans;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 
-import com.headline.model.itens.Fisico;
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import com.headline.model.itens.Item;
+import com.headline.persistence.ClienteDAO;
 
-import javassist.expr.Instanceof;
-
-@ManagedBean
+@Named
 @ViewScoped
-public class ItemSelecionado extends UsuarioOperations{
+public class ItemSelecionado extends UsuarioOperations implements Serializable{
 	
-	private Item item;
+	private static final long serialVersionUID = 1L;
 	
-	public void adicionarAoCarrinho(){
-		if(item.getClass().isInstance(Fisico.class)){
-			((Fisico) item).setQuantidadeEmEstoque(((Fisico) item).getQuantidadeEmEstoque()-1);
-			//dao.update(item)
-		}
-		
+	private ClienteDAO dao;
+	
+	@PostConstruct
+	public void initialize() {
+		dao = new ClienteDAO();
+	}
+	
+	private Item it;
+
+	public Item getIt() {
+		return it;
 	}
 
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
+	public void setIt(Item item) {
+		this.it = item;
 	}
 	
 	public String load(){
 		return"select_item?faces-redirect=true";
+	}
+	
+	public void adicionarAoCarrinho(Item item) throws Exception {
+		dao.adicionarItemAoCarrinho(getUsuarioLogadoAsCustomer(), item);
 	}
 	
 	

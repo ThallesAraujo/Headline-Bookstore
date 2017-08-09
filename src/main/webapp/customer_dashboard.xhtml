@@ -30,12 +30,25 @@ html {
 }
 
 .ui-panelgrid .ui-panelgrid-cell {
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-top {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-bottom {
 	border-color: TRANSPARENT;
 	background-color: TRANSPARENT;
 }
 
 .ui-widget-content {
 	background-color: TRANSPARENT;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-list{
+	background-color: WHITE;
 }
 </style>
 
@@ -45,13 +58,90 @@ html {
 				style="font-size:1.3em; color: #6D929B; padding: 0.5em;"
 				value="Dashboard - Cliente"></p:outputLabel>
 			<h:form>
-				<p:panel header="Itens" style="background-color: TRANSPARENT;">
-					<p:panelGrid columns="1"
-						style="border:0px; border-color: TRANSPARENT; background-color: TRANSPARENT;">
-						<p:commandButton value="Adicionar Cartão"
-							action="#{cartaoBean.load()}"></p:commandButton>
-					</p:panelGrid>
+				<p:growl id="message" showDetail="true" life="3000"
+					autoUpdate="true" />
+				<p:panel header="Cartões Cadastrados:"
+					style="background-color: TRANSPARENT;">
+
+					<p:dataGrid id="lista_cartoes"
+						value="#{usuarioBean.getUsuarioLogadoAsCustomer().getCartoes()}"
+						var="cartao" columns="3" paginator="true"
+						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+						<p:panel style="border: 0px;">
+							<h:panelGrid columns="1">
+								<p:outputLabel value="#{('Titular: ').concat(cartao.titular)}"
+									style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
+								<p:outputLabel
+									value="#{('Vencimento: ').concat(cartao.dataVencimento)}"
+									style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
+								<p:commandButton value="Remover este cartão"
+								style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+									action="#{customerBean.removerCartao(cartao)}"
+									icon="fa fa-trash" update="lista_cartoes"></p:commandButton>
+							</h:panelGrid>
+						</p:panel>
+					</p:dataGrid>
+
 				</p:panel>
+
+				<p:panel header="Carrinho (Pedido não finalizado)"
+					style="background-color: TRANSPARENT;">
+
+					<p:dataGrid id="ls_carrinho"
+						value="#{customerBean.getUsuarioLogadoAsCustomer().getCarrinho().getItens()}"
+						var="item" columns="3" paginator="true"
+						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+						<p:panel style="border: 0px;">
+							<h:panelGrid columns="1">
+								<p:link value="#{item.titulo}"
+									outcome="#{itemSelecionado.load()}"
+									style="font-size:2em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);">
+									<f:param name="it" value="#{item.id}"></f:param>
+								</p:link>
+								<p:outputLabel value="#{('R$ ').concat(item.preco)}"
+									style="font-size:1.5em; color: #FFFFFF; text-shadow: 0 2px 2px rgba(0,0,0,0.8);"></p:outputLabel>
+								<p:outputLabel value="#{item.autor}"
+									style="font-size:1em; color: #B7AFA3 ; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+								<p:commandButton value="Remover Item" icon="fa fa-trash"
+								style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+									update="ls_carrinho"
+									action="#{customerBean.removerItemDoCarrinho(item)}"></p:commandButton>
+							</h:panelGrid>
+						</p:panel>
+					</p:dataGrid>
+					<p:commandButton value="Concluir compra (Fechar carrinho)"
+						style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+						onclick="PF('dialog').show();"
+						rendered="#{customerBean.usuarioPossuiAlgumCartao()}"></p:commandButton>
+						
+					<p:dialog widgetVar="dialog" showEffect="clip" hideEffect="clip" 
+						style="background-color:#FFFFFF;">
+						<p:panelGrid columns="1">
+							<p:outputLabel value="Selecionar um cartao:"></p:outputLabel>
+							<p:selectOneMenu value="#{compraBean.cartao}">
+								<f:selectItems
+									value="#{customerBean.getUsuarioLogadoAsCustomer().getCartoes()}"
+									var="cartao" itemValue="#{cartao}"
+									itemLabel="#{cartao.getNumero()}"></f:selectItems>
+							</p:selectOneMenu>
+							
+							<p:panelGrid columns="2">
+								<p:commandButton value="Selecionar e Concluir"
+								style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+									oncomplete="PF('dialog').hide()"
+									icon="ui-icon-check"
+									action="#{compraBean.fecharCompra(customerBean.getUsuarioLogadoAsCustomer().getCarrinho())}"
+									update="ls_carrinho"
+									/>
+								<p:commandButton value="Cancelar" type="button"
+									style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:panelGrid>
+						</p:panelGrid>
+					</p:dialog>
+
+				</p:panel>
+
 			</h:form>
 		</div>
 	</ui:define>

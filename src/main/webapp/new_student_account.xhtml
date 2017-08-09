@@ -24,7 +24,7 @@ html {
 	<h:form>
 		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
 		<p:panelGrid columns="1" styleClass="ui-noborder"
-			style="margin-top: 7%; margin-left:3%; min-width:40%;  max-width:40%; min-height:50%;">
+			style="margin-top: 7%; margin-left:3%; min-width:40%; border-radius: 10px; max-width:40%; min-height:50%;">
 			<p:link outcome="index?faces-redirect=true">
 				<h:graphicImage library="imagesandlogos" name="logotipo.png"
 					style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
@@ -34,60 +34,61 @@ html {
 				style="font-size:1.3em "></p:outputLabel>
 
 			<p:panelGrid columns="1" style="width:650px">
-				<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
+				<p:outputLabel value="Identificação" style="min-width:90%; border-radius: 10px;"></p:outputLabel>
 				
-				<p:inputText placeholder="Nome completo" style="min-width:90%"
+				<p:inputText placeholder="Nome completo" style="min-width:90%; border-radius: 10px;"
 					value="#{studentAccount.estudante.nome}" required="true"
 					requiredMessage="Digite seu nome antes de prosseguir"></p:inputText>
 					
 				<p:inputMask mask="999.999.999-99" placeholder="Número de CPF"
-					style="min-width:90%" value="#{studentAccount.estudante.cpf}"
+					style="min-width:90%; border-radius: 10px;" value="#{studentAccount.estudante.cpf}"
 					required="true"
 					requiredMessage="Digite seu CPF antes de prosseguir"></p:inputMask>
 
 				<p:outputLabel value="Endereço"></p:outputLabel>
 				
 				<p:inputMask mask="99999-999" placeholder="CEP"
-					style="min-width:90%" value="#{studentAccount.estudante.cep}"
+					style="min-width:90%; border-radius: 10px;" value="#{studentAccount.estudante.cep}"
 					required="true" requiredMessage="Digite o CEP de sua localidade"></p:inputMask>
 					
-				<p:inputText placeholder="Cidade" style="min-width:90%"
+				<p:inputText placeholder="Cidade" style="min-width:90%; border-radius: 10px;"
 					value="#{studentAccount.estudante.cidade}"
 					required="true"
 					requiredMessage="Informe a cidade onde você mora"></p:inputText>
 					
-				<p:inputText placeholder="Estado" style="min-width:90%"
+				<p:inputText placeholder="Estado" style="min-width:90%; border-radius: 10px;"
 					value="#{studentAccount.estudante.estado}" required="true"
 					requiredMessage="Informe o estado onde você mora"></p:inputText>
 					
-				<p:inputTextarea placeholder="Logradouro" style="min-width:90%"
+				<p:inputTextarea placeholder="Logradouro" style="min-width:90%; border-radius: 10px;"
 					value="#{studentAccount.estudante.logradouro}" required="true"
 					requiredMessage="Digite o nome da rua, o bairro e o número da casa/apto. onde você mora"></p:inputTextarea>
 
 				<p:outputLabel value="Informações de login"></p:outputLabel>
 				<p:inputText
 					placeholder="E-mail (dê preferência ao e-mail institucional)"
-					style="min-width:90%" value="#{studentAccount.estudante.email}" required="true"
+					style="min-width:90%; border-radius: 10px;" value="#{studentAccount.estudante.email}" required="true"
 					requiredMessage="Por favor, informe seu e-mail (será utilizado no login)"
 					validatorMessage="E-mail inválido">
 					<f:validateRegex
 						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)" />
 				</p:inputText>
 				
-				<p:password placeholder="Digite sua Senha" style="min-width:90%" match="confirmacaoSenha" feedback="true" redisplay="true" required="true"></p:password>
+				<p:password placeholder="Digite sua Senha" style="min-width:90%; border-radius: 10px;" match="confirmacaoSenha" feedback="true" redisplay="true" required="true"></p:password>
 				
-				<p:password id="confirmacaoSenha" placeholder="Digite Novamente a Senha" style="min-width:90%"
+				<p:password id="confirmacaoSenha" placeholder="Digite Novamente a Senha" style="min-width:90%; border-radius: 10px;"
 					value="#{studentAccount.estudante.senha}" required="true"
 					feedback="true" redisplay="true"
 					requiredMessage="Informe a senha que será utilizada no login"></p:password>
 				
 
 				<p:outputLabel value="Instituição de Ensino"></p:outputLabel>
-				<p:inputText placeholder="Nome da Instituição" style="min-width:90%"
+				<p:inputText placeholder="Nome da Instituição" style="min-width:90%; border-radius: 10px;"
 					value="#{studentAccount.estudante.instituicao}" required="true" 
 					requiredMessage="Por favor, informe o nome completo da instituição de ensino onde você estuda"></p:inputText>
 
 				<p:commandButton value="Concluir Cadastro"
+					style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
 					action="#{studentAccount.salvarConta()}"></p:commandButton>
 			</p:panelGrid>
 

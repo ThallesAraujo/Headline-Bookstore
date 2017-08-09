@@ -2,13 +2,15 @@ package com.headline.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
+@Named
 @ViewScoped
-@ManagedBean
 public class Cadastro implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	public String loadInit(){
 		return "new_user?faces-redirect=true";
 	}

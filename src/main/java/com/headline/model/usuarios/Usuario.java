@@ -1,21 +1,17 @@
 package com.headline.model.usuarios;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
 
 
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 @DiscriminatorColumn(name ="Tipo", discriminatorType= DiscriminatorType.STRING)
-public abstract class Usuario {
+public abstract class Usuario{
 	
 	private String nome;
 	private String cep;
@@ -96,6 +92,12 @@ public abstract class Usuario {
 	
 	
 	public abstract String loadDashboard();
+
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + "]";
+	}
+	
 	
 	
 

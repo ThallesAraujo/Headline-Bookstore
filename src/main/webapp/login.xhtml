@@ -21,25 +21,36 @@ html {
 	background-size: 100%;
 }
 
+tr{
+	background-color: transparent!important;
+}
+
+
 .ui-panelgrid .ui-panelgrid-cell {
 	padding: 10px 35px;
 }
 
+
 </style>
 	<h:form prependId="false" onsubmit="action='j_security_check';">
-	<p:growl id="message" showDetail="true" life="3000" autoUpdate="true"/>
-	<p:panelGrid columns="1" styleClass="ui-noborder" style="margin-top: 10%; margin-left:3%; min-width:30%; min-height:50%;">
-		<p:link outcome="index?faces-redirect=true">
+		<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+		<p:panelGrid columns="1" styleClass="ui-noborder"
+			style="margin-top: 10%; margin-left:3%; min-width:30%; min-height:50%; 	background-color: rgba(255, 255, 255, 0.7) !important;">
+			<p:link outcome="index?faces-redirect=true">
 				<h:graphicImage library="imagesandlogos" name="logotipo.png"
 					style="vertical-align: middle; margin-top: 20px; margin-bottom: 20px;" />
 			</p:link>
-		<p:inputText id="j_username" placeholder="Nome de usuário ou email" style="width:95%;"></p:inputText>
-		<p:password id="j_password" placeholder="Senha" style="width:95%;" ></p:password>
-		<p:panelGrid columns="2">
-			<p:commandButton id="bt_logar" value="Entrar" ajax="false" style="margin-left:0px" />
-			<p:link id="bt_cadastro" value="Cadastre-se" outcome="#{cadastro.loadInit()}"></p:link>
+			<p:inputText id="j_username" placeholder="Nome de usuário ou email"
+				style="width:95%; border-radius: 10px;"></p:inputText>
+			<p:password id="j_password" placeholder="Senha"
+				style="width:95%; border-radius: 10px;"></p:password>
+			<p:panelGrid columns="2" styleClass="null">
+				<p:commandButton id="bt_logar" value="Entrar" ajax="false"
+					style="margin-left:0px;border-color: #6D929B;border-radius: 20px;background-color: transparent;" />
+				<p:link id="bt_cadastro" value="Cadastre-se"
+					outcome="#{cadastro.loadInit()}"></p:link>
+			</p:panelGrid>
 		</p:panelGrid>
-	</p:panelGrid>
 	</h:form>
 </h:body>
 </html>

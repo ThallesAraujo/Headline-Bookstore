@@ -1,40 +1,28 @@
 package com.headline.beans;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.imageio.ImageIO;
-
-import org.primefaces.model.UploadedFile;
-import org.primefaces.model.UploadedFileWrapper;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import com.headline.model.itens.Item;
 import com.headline.persistence.GenericDAO;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 
-
-@ManagedBean
+@Named
 @ViewScoped
-public class IndexBean{
+public class IndexBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private GenericDAO dao;
 	
-	
 	@PostConstruct
-	public void initialize(){
+	public void initialize() {
 		dao = new GenericDAO();
 	}
 	

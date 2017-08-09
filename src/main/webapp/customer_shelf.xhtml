@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web"
+	rel="stylesheet" />
+<h:outputStylesheet
+	name="webjars/font-awesome/4.4.0/css/font-awesome.css" />
+
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<h:head>
+		<ui:define name="title">Inicio</ui:define>
+	</h:head>
+
+	<ui:define name="content">
+		<style type="text/css">
+html {
+	position: relative;
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: .5em 1em .3em;
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-top {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-bottom {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+</style>
+		<h:form>
+			<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+			<p:panel header="Estante" icon="fa fa-truck"
+				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+
+				<p:dataGrid
+					value="#{estanteBean.getUsuarioLogadoAsCustomer().getEstante().getLivros()}"
+					var="item">
+					<p:panelGrid columns="1">
+						<img
+							src="data:image/png;base64,#{estanteBean.getImageContent(item.capa)}"
+							height="250" width="160" style="box-shadow: 0 2px 2px #000000;" />
+
+						<p:outputLabel value="#{item.titulo}"></p:outputLabel>
+						<p:outputLabel value="#{item.autor}"></p:outputLabel>
+						<p:outputLabel value="#{item.produtor.nome}"></p:outputLabel>
+						<a href="#{item.arquivo}" style="font-size:1em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);">Visualizar</a>
+					</p:panelGrid>
+				</p:dataGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,6 +1,7 @@
 package com.headline.persistence;
 
 import java.awt.Image;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,7 @@ public class GenericDAO extends DAO{
 		try {
 			em.persist(o);
 			transaction.commit();
-		} catch (PersistenceException pe) {
+		} catch (Exception pe) {
 			pe.printStackTrace();
 			transaction.rollback();
 			throw new Exception("Falha em persistir "+o.getClass().getSimpleName(), pe);
@@ -69,6 +70,21 @@ public class GenericDAO extends DAO{
 		return resultado;
 	}
 	
+	public Object getByID(Object objeto, String id) throws Exception {
+		EntityManager em = getEntityManager();
+		Object resultado = null;
+		try {
+			resultado = em.find(objeto.getClass(), id);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+			throw new Exception("Erro na recuperação do item.", pe);
+		} finally {
+			em.close();
+		}
+
+		return resultado;
+	}
+	
 	public List<Object> getAll(Object o) throws Exception {
 		EntityManager em = getEntityManager();
 		List<Object> resultado = null;
@@ -97,7 +113,8 @@ public class GenericDAO extends DAO{
 		try{
 			em.merge(o);
 			transaction.commit();
-		}catch(PersistenceException e){
+		}catch(Exception e){
+			System.out.println("Chegou aqui");
 			throw new Exception("Erro na atualização de "+o.getClass().getSimpleName(),e);
 		}finally{
 			em.close();
@@ -105,10 +122,43 @@ public class GenericDAO extends DAO{
 		
 	}
 	
+	
+	public void delete(Object o) throws Exception{
+		EntityManager em = getEntityManager();
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		try{
+			em.detach(o);
+			em.remove(o);
+			transaction.commit();
+		} catch (PersistenceException pe) {
+			transaction.rollback();
+			pe.printStackTrace();
+			throw new Exception("Erro na exclusão", pe);
+		} finally {
+			em.close();
+		}
+	}
+	
 	 public Image find(Long id) {
 		 EntityManager em = getEntityManager();
 	     return em.find(Image.class, id);
 	 }
+
+	public Object getByID(Object objeto, BigInteger id) throws Exception {
+		EntityManager em = getEntityManager();
+		Object resultado = null;
+		try {
+			resultado = em.find(objeto.getClass(), id);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+			throw new Exception("Erro na recuperação do item.", pe);
+		} finally {
+			em.close();
+		}
+
+		return resultado;
+	}
 
 
 }

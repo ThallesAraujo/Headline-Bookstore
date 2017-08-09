@@ -1,54 +1,39 @@
 package com.headline.beans;
 
-//
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import com.headline.model.Editora;
 import com.headline.model.itens.Categoria;
 import com.headline.model.itens.Digital;
 import com.headline.model.itens.Genero;
 import com.headline.persistence.GenericDAO;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class ItemDigitalBean extends UsuarioOperations implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
+	
 	private GenericDAO dao;
 	
 	private Digital item;
 	
-	private Editora headline;
-	
 	private UploadedFile capa;
-	
-	private UploadedFile arquivo;
 
 	@PostConstruct
-	public void instantiate() {
+	public void initialize() {
 		dao = new GenericDAO();
 		item = new Digital();
-		headline = new Editora();
-		headline.setNome("Headline Publications");
-		headline.setCnpj("999.999.999-99");
-		headline.setEmail("contact@headline.com");
-		try{
-			dao.save(headline);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	public Digital getItem() {
@@ -59,17 +44,6 @@ public class ItemDigitalBean extends UsuarioOperations implements Serializable {
 		this.item = item;
 	}
 
-	public void uploadArquivo(FileUploadEvent event) {
-
-		if (event.getFile().getFileName().endsWith("pdf") || event.getFile().getFileName().endsWith("epub")) {
-			arquivo = event.getFile();
-			item.setArquivo(arquivo.getContents());
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("O formato de arquivo não é suportado."));
-		}
-
-	}
 
 	public void uploadCapa(FileUploadEvent event) {
 
@@ -89,8 +63,10 @@ public class ItemDigitalBean extends UsuarioOperations implements Serializable {
 		if (item.getCapa() != null) {
 			if (item.getArquivo() != null) {
 				try{
-					item.setAutor(getUsuarioLogado().getNome());
-					item.setProdutor(headline);
+					if(!getUsuarioLogadoAsProducer().isFuncionarioEditora()) {
+						item.setAutor(getUsuarioLogado().getNome());
+					}
+					item.setProdutor(getUsuarioLogadoAsProducer().getEditora());
 					dao.save(item);
 				}catch(Exception  e){
 					e.printStackTrace();
@@ -124,13 +100,6 @@ public class ItemDigitalBean extends UsuarioOperations implements Serializable {
 		this.capa = capa;
 	}
 
-	public UploadedFile getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(UploadedFile arquivo) {
-		this.arquivo = arquivo;
-	}
 
 	public Categoria[] getCategorias() {
 		return Categoria.values();

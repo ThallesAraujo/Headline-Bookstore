@@ -1,25 +1,29 @@
 package com.headline.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import com.headline.model.itens.Categoria;
 import com.headline.model.itens.Item;
 import com.headline.persistence.ItemDAO;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class LivrosBean {
+public class LivrosBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	private ItemDAO dao;
 	
 	@PostConstruct
-	public void initialize(){
+	public void initialize() {
 		dao = new ItemDAO();
 	}
+	
 	
 	public List<Item> getLivros(){
 		try{

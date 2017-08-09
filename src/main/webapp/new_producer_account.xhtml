@@ -35,37 +35,42 @@ html {
 
 			<p:panelGrid columns="1" style="width:650px">
 				<p:outputLabel value="Identificação" style="min-width:90%"></p:outputLabel>
-				<p:inputText placeholder="Nome completo" style="min-width:90%"
+				<p:inputText placeholder="Nome completo"
+					style="width:90%; border-radius: 10px;"
 					value="#{produtorBean.produtor.nome}" required="true"
 					requiredMessage="Digite seu nome antes de prosseguir"></p:inputText>
 				<p:inputMask mask="999.999.999-99" placeholder="Número de CPF"
-					style="min-width:90%" value="#{produtorBean.produtor.cpf}"
-					required="true"
+					style="width:90%; border-radius: 10px;"
+					value="#{produtorBean.produtor.cpf}" required="true"
 					requiredMessage="Digite seu CPF antes de prosseguir"></p:inputMask>
 
 				<p:outputLabel value="Informações de login"></p:outputLabel>
 				<p:inputText
 					placeholder="E-mail (dê preferência ao e-mail institucional)"
-					style="min-width:90%" value="#{produtorBean.produtor.email}"
-					required="true"
+					style="width:90%; border-radius: 10px;"
+					value="#{produtorBean.produtor.email}" required="true"
 					requiredMessage="Por favor, informe seu e-mail (será utilizado no login)"
 					validatorMessage="E-mail inválido">
 					<f:validateRegex
 						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)" />
 				</p:inputText>
-				
-				<p:password placeholder="Digite sua Senha" style="min-width:90%" match="confirmacaoSenha" feedback="true" redisplay="true" required="true"></p:password>
-				
-				<p:password id="confirmacaoSenha" placeholder="Digite Novamente a Senha" style="min-width:90%"
+
+				<p:password placeholder="Digite sua Senha"
+					style="width:90%; border-radius: 10px;" match="confirmacaoSenha"
+					feedback="true" redisplay="true" required="true"></p:password>
+
+				<p:password id="confirmacaoSenha"
+					placeholder="Digite Novamente a Senha"
+					style="width:90%; border-radius: 10px;"
 					value="#{produtorBean.produtor.senha}" required="true"
 					feedback="true" redisplay="true"
 					requiredMessage="Informe a senha que será utilizada no login"></p:password>
 
 				<p:panelGrid columns="2" style="max-width:90%;">
-					<h:selectBooleanCheckbox id="cb_produtor"
+					<p:selectBooleanCheckbox id="cb_produtor"
 						value="#{produtorBean.funcionarioEditora}">
 						<p:ajax update="painel_editora"></p:ajax>
-					</h:selectBooleanCheckbox>
+					</p:selectBooleanCheckbox>
 					<p:outputLabel
 						value="Sou funcionário ou representante de editora (Deixar desmarcado caso você seja um escritor independente.)"></p:outputLabel>
 				</p:panelGrid>
@@ -74,31 +79,40 @@ html {
 					<p:panelGrid rendered="#{produtorBean.isFuncionarioEditora()}">
 						<p:outputLabel id="ed_1" value="Informações de Editora"></p:outputLabel>
 						<p:inputText id="ed_2" placeholder="Nome"
-							style="min-width:90%; margin-top:10px !important;"
-							value="#{produtorBean.editora.nome}" required="true" requiredMessage="Por favor, informe o nome da editora onde você trabalha" ></p:inputText>
+							style="width:90%; border-radius: 10px; margin-top:10px !important;"
+							value="#{produtorBean.editora.nome}" required="true"
+							requiredMessage="Por favor, informe o nome da editora onde você trabalha"></p:inputText>
 						<p:inputMask id="ed_3" mask="99.999.99/9999-99" placeholder="CNPJ"
-							style="min-width:90%; margin-top:10px !important;"
-							value="#{produtorBean.editora.cnpj}" required="true" requiredMessage="É necessário informar o CNPJ" ></p:inputMask>
+							style="border-radius: 10px;width:90%; border-radius: 10px; margin-top:10px !important;"
+							value="#{produtorBean.editora.cnpj}" required="true"
+							requiredMessage="É necessário informar o CNPJ"></p:inputMask>
 						<p:inputText id="ed_4" placeholder="Seu cargo na editora"
-							style="min-width:90%; margin-top:10px !important; margin-bottom:10px !important;"
-							value="#{produtorBean.produtor.cargo}" required="true" requiredMessage="Informe seu cargo na editora"></p:inputText>
+							style="border-radius: 10px; min-width:90%; margin-top:10px !important; margin-bottom:10px !important;"
+							value="#{produtorBean.produtor.cargo}" required="true"
+							requiredMessage="Informe seu cargo na editora"></p:inputText>
 
 						<p:outputLabel id="ed_5" value="Endereço da Editora"></p:outputLabel>
 						<p:inputMask id="ed_6" placeholder="CEP"
-							style="min-width:90%; margin-top:10px !important;"
-							value="#{produtorBean.editora.cep}" mask="99999-999" required="true" requiredMessage="Por favor, informe o CEP da localidade da editora"></p:inputMask>
+							style="min-width:90%; border-radius: 10px; margin-top:10px !important;"
+							value="#{produtorBean.editora.cep}" mask="99999-999"
+							required="true"
+							requiredMessage="Por favor, informe o CEP da localidade da editora"></p:inputMask>
 						<p:inputText id="ed_7" placeholder="Cidade"
-							style="min-width:90%; margin-top:10px !important;"
-							value="#{produtorBean.editora.cidade}" required="true" requiredMessage="Por favor, informe a cidade onde fica a editora"></p:inputText>
+							style="min-width:90%; border-radius: 10px; margin-top:10px !important;"
+							value="#{produtorBean.editora.cidade}" required="true"
+							requiredMessage="Por favor, informe a cidade onde fica a editora"></p:inputText>
 						<p:inputText id="ed_8" placeholder="Estado"
-							style="min-width:90%; margin-top:10px !important;"
-							value="#{produtorBean.editora.estado}" required="true" requiredMessage="Por favor, informe o estado onde fica a editora"></p:inputText>
+							style="min-width:90%; border-radius: 10px; margin-top:10px !important;"
+							value="#{produtorBean.editora.estado}" required="true"
+							requiredMessage="Por favor, informe o estado onde fica a editora"></p:inputText>
 						<p:inputTextarea id="ed_9" placeholder="Logradouro"
-							style="min-width:90%; margin-top:10px !important;"
-							value="#{produtorBean.editora.logradouro}" required="true" requiredMessage="Informe o nome da rua, do bairro e número do do edifício onde fica a editora"></p:inputTextarea>
+							style="min-width:90%; border-radius: 10px; margin-top:10px !important;"
+							value="#{produtorBean.editora.logradouro}" required="true"
+							requiredMessage="Informe o nome da rua, do bairro e número do do edifício onde fica a editora"></p:inputTextarea>
 					</p:panelGrid>
 				</h:panelGroup>
 				<p:commandButton value="Concluir Cadastro"
+					style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
 					action="#{produtorBean.salvarProdutor()}"></p:commandButton>
 			</p:panelGrid>
 

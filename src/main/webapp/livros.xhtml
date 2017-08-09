@@ -47,19 +47,32 @@
 				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 				<h:panelGrid columns="4"
 					style="width:100%; border: 0px; margin-top: 20px; margin-bottom: 20px; background-color: TRANSPARENT;">
-					<p:dataGrid value="#{livrosBean.getLivros()}" var="livro" columns="3"
+					<p:dataGrid value="#{livrosBean.getLivros()}" var="item" columns="3"
 						paginator="true"
 						style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
 						<p:panel style="border: 0px;">
 							<h:panelGrid columns="4">
-								<img src="data:image/png;base64,#{indexBean.getImageContent(livro.capa)}" height="250" width="160"/>
+								<img
+									src="data:image/png;base64,#{indexBean.getImageContent(item.capa)}"
+									height="250" width="160" style="box-shadow: 0 2px 2px #000000;" />
 								<p:panelGrid columns="1">
-									<p:link value="#{livro.titulo}" outcome="#{itemSelecionado.load()}" style="font-size:2em; color: #B7AFA3; max-height: 250px;">
-										<f:param name="item" value="#{livro.id}"></f:param>
+									<p:link value="#{item.titulo}"
+										outcome="#{itemSelecionado.load()}"
+										style="font-size:2em; color: #B7AFA3; max-height: 250px; text-shadow: 0 1px 1px rgba(0,0,0,0.8);">
+										<f:param name="it" value="#{item.id}"></f:param>
 									</p:link>
-									<p:outputLabel value="#{('R$ ').concat(livro.preco)}" style="font-size:1.5em; color: #6D929B;"></p:outputLabel>
-									<p:outputLabel value="#{livro.autor}" style="font-size:1em; color: #B7AFA3 ;"></p:outputLabel>
-									<p:commandButton value="Adicionar ao carrinho" icon="fa fa-shopping-cart" action="#{itemSelecionado.adicionarAoCarrinho()}" rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"/>
+									<p:outputLabel
+										value="#{item.getClass().getSimpleName().equals('Digital')?'Gratuito':('R$ ').concat(item.preco)}"
+										style="font-size:1.5em; color: #FFFFFF; text-shadow: 0 2px 2px rgba(0,0,0,0.8);"></p:outputLabel>
+									<p:outputLabel value="#{item.autor}"
+										style="font-size:1em; color: #B7AFA3 ; text-shadow: 0 1px 1px rgba(0,0,0,0.8);"></p:outputLabel>
+									<p:commandButton
+										style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+										value="#{item.isEmFalta()? 'Item em falta': 'Adic. ao carrinho'}"
+										icon="fa fa-shopping-cart"
+										action="#{customerBean.adicionarItemAoCarrinho(item)}"
+										rendered="#{usuarioBean.isCurrentUser('Cliente') or usuarioBean.isCurrentUser('Estudante')}"
+										disabled="#{item.isEmFalta()}" />
 								</p:panelGrid>
 							</h:panelGrid>
 						</p:panel>

@@ -34,23 +34,27 @@ html {
 			</p:link>
 
 			<p:inputText placeholder="Titular (Conforme aparece no cartão)"
-				value="#{cartaoBean.cartao.titular}" required="true"
+				style="min-width:90%; border-radius: 10px;"
+				value="#{customerBean.cartao.titular}" required="true"
 				requiredMessage="Informe o nome do titular do cartão"
 				style="min-width:90%"></p:inputText>
 			<p:calendar placeholder="Data de Vencimento:"
-				value="#{cartaoBean.cartao.dataVencimento}" required="true"
+				value="#{customerBean.cartao.dataVencimento}" required="true"
 				requiredMessage="Informe a data de vencimento do cartão"
 				style="min-width:90%"></p:calendar>
 			<p:inputText placeholder="Número"
-				value="#{cartaoBean.cartao.numero}" required="true"
+				style="min-width:90%; border-radius: 10px;"
+				value="#{customerBean.cartao.numero}" required="true"
 				requiredMessage="Informe o número do cartão" style="min-width:90%" maxlength="16">
 				</p:inputText>
 			<p:inputText placeholder="Dígitos de segurança"
-				value="#{cartaoBean.cartao.digitosDeSeguranca}" required="true"
+				style="min-width:90%; border-radius: 10px;"
+				value="#{customerBean.cartao.digitosDeSeguranca}" required="true"
 				requiredMessage="Informe os dígitos de segurança do cartão"
 				style="min-width:90%" maxlength="3"></p:inputText>
 			<p:commandButton value="Salvar Cartão"
-				action="#{cartaoBean.salvarCartao()}"></p:commandButton>
+			style="border-color: #6D929B;border-radius: 20px;background-color: transparent;"
+				action="#{customerBean.salvarCartao()}"></p:commandButton>
 
 		</p:panelGrid>
 	</h:form>

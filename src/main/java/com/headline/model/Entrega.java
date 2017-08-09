@@ -1,7 +1,9 @@
 package com.headline.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,15 +11,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
-public class Entrega {
+public class Entrega implements Serializable{
 	
-	@OneToOne
+	@Transient
+	private static final long serialVersionUID = 1L;
+
+	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
 	private Compra compra;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private String id;
+	private Integer id;
 	
 	private LocalDate previsao;
 	
@@ -25,21 +32,7 @@ public class Entrega {
 	private Status status;
 
 	public Entrega(){}
-	
-	public Entrega(Compra compra, LocalDate previsao, Status status) {
-		super();
-		this.setCompra(compra);
-		this.previsao = previsao;
-		this.status = status;
-	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public LocalDate getPrevisao() {
 		return previsao;
@@ -63,6 +56,11 @@ public class Entrega {
 
 	public void setCompra(Compra compra) {
 		this.compra = compra;
+	}
+
+
+	public Integer getId() {
+		return this.id;
 	}
 
 }

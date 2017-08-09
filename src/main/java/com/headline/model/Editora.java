@@ -1,24 +1,30 @@
 package com.headline.model;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 
 @Entity
-public class Editora{
+public class Editora implements Serializable{
 	
+	@Transient
+	private static final long serialVersionUID = 1L;
+
 	private String nome;
+	
 	@Id
 	private String cnpj;
 	
 	private String email;
 	
-	@OneToMany (mappedBy="editora", fetch= FetchType.EAGER)
+	@OneToMany (mappedBy="editora", fetch= FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Produtor> funcionarios;
 	
 	private String cep;
@@ -95,6 +101,33 @@ public class Editora{
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Editora other = (Editora) obj;
+		if (cnpj == null) {
+			if (other.cnpj != null)
+				return false;
+		} else if (!cnpj.equals(other.cnpj))
+			return false;
+		return true;
+	}
+
+	
 
 	
 	

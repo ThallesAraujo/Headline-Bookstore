@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web"
+	rel="stylesheet" />
+<h:outputStylesheet
+	name="webjars/font-awesome/4.4.0/css/font-awesome.css" />
+
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+
+	<h:head>
+		<ui:define name="title">Inicio</ui:define>
+	</h:head>
+
+	<ui:define name="content">
+		<style type="text/css">
+html {
+	position: relative;
+	background: url("#{resource['/imagesandlogos/background.jpg']}");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: .5em 1em .3em;
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-top {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+
+.ui-paginator.ui-paginator-bottom {
+	border-color: TRANSPARENT;
+	background-color: TRANSPARENT;
+}
+</style>
+		<h:form>
+			<p:growl id="message" showDetail="true" life="3000" autoUpdate="true" />
+			<p:panel header="Entregas" icon="fa fa-truck"
+				style="border-color: TRANSPARENT; background-color: TRANSPARENT;">
+
+				<p:dataTable var="entrega" value="#{customerDeliversBean.getEntregas()}">
+					<p:column headerText="Número da Compra" style="text-align: center;">
+						<h:outputText value="#{entrega.compra.id}" />
+					</p:column>
+					
+					<p:column headerText="Status da Entrega"  style="text-align: center;">
+						<h:outputText value="#{entrega.status}" />
+					</p:column>
+
+					<p:column headerText="Previsão de Chegada"  style="text-align: center;">
+						<h:outputText value="#{entrega.previsao}" />
+					</p:column>
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
