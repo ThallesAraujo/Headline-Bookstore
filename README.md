@@ -17,7 +17,7 @@ A aplicação visa fornecer acesso à compra de livros e publicações em format
 
 <h3>Objetivo do Projeto:</h3>
 
-- Aplicar as tecnologias aprendidas na disciplina de Desenvolvimento de Aplicações Corporativas, no período 2017.2
+- Aplicar as tecnologias aprendidas na disciplina de Desenvolvimento de Aplicações Corporativas, no período 2017.1
 
 <h3>Tecnologias aplicadas/ Ferramentas utilizadas:</h3>
 
